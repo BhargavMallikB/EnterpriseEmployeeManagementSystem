@@ -1,0 +1,126 @@
+<div
+  class="time-picker-native-wrapper"
+  [class.disabled]="disabled()"
+>
+  <div class="input-container" style="position: relative">
+    <!-- Use the reusable input-field component -->
+    <lib-input-field
+      [label]="label()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [disabled]="disabled()"
+      [error]="combinedError()"
+      [size]="size()"
+      [readonly]="false"
+      [type]="'text'"
+      [value]="displayValue()"
+      [autofocus]="false"
+      (valueChange)="onInputChange($event)"
+      (focus)="onFocus()"
+    ></lib-input-field>
+
+    <!-- Clock icon button for desktop dropdown toggle -->
+    <lib-button
+      *ngIf="!disabled()"
+      class="tp-clock-icon"
+      [variant]="'plain'"
+      [size]="'small'"
+      [suppressAlert]="true"
+      (clicked)="isDropdownOpen.set(!isDropdownOpen())"
+      aria-label="Open time picker"
+    >
+      <div btn__icon>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#888" stroke-width="2" />
+          <path
+            d="M12 7v5l3 3"
+            stroke="#888"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </lib-button>
+  </div>
+
+  <!-- Dropdown for desktop time selection -->
+  <div
+  *ngIf="isDropdownOpen() && !disabled()"
+    class="tp-dropdown"
+    tabindex="-1"
+  >
+    <div class="tp-dropdown-row">
+      <!-- Hour select -->
+      <select
+        class="tp-hour"
+        [disabled]="disabled()"
+        (change)="onHourChange($event)"
+        [value]="selectedHour()"
+      >
+        <option value="" disabled>Hour</option>
+        <option
+          *ngFor="let hour of hours()"
+          [value]="hour"
+          [disabled]="isHourDisabled(hour)"
+        >
+          {{ internalFormat() === '12' ? (hour === 0 ? '12' : hour.toString()) :
+          hour.toString().padStart(2, '0') }}
+        </option>
+      </select>
+
+      <span class="tp-separator">:</span>
+
+      <!-- Minute select -->
+      <select
+        class="tp-minute"
+        [disabled]="disabled()"
+        (change)="onMinuteChange($event)"
+        [value]="selectedMinute()"
+      >
+        <option value="" disabled>Min</option>
+        <option
+          *ngFor="let minute of minutes()"
+          [value]="minute"
+          [disabled]="isMinuteDisabled(minute)"
+        >
+          {{ minute.toString().padStart(2, '0') }}
+        </option>
+      </select>
+
+      <!-- AM/PM select (only for 12-hour format) -->
+      <select
+        *ngIf="internalFormat() === '12'"
+        class="tp-ampm"
+        [disabled]="disabled()"
+        (change)="onAmpmChange($event)"
+        [value]="ampm()"
+      >
+        <option value="AM" [disabled]="isAmpmDisabled('AM')">AM</option>
+        <option value="PM" [disabled]="isAmpmDisabled('PM')">PM</option>
+      </select>
+
+      <lib-button
+        class="tp-set"
+        [variant]="'primary'"
+        [label]="'Set'"
+        [size]="'small'"
+        [disabled]="disabled()"
+        [suppressAlert]="true"
+        (clicked)="onDropdownSelect(selectedHour(), selectedMinute(), ampm())"
+      >
+      </lib-button>
+    </div>
+    <div class="tp-format-toggle" style="margin-top: 8px; text-align: right">
+      <lib-button
+        [variant]="'plain'"
+        [size]="'small'"
+        [disabled]="disabled()"
+        [suppressAlert]="true"
+        (clicked)="toggleFormat()"
+        [label]="'Switch to ' + (internalFormat() === '12' ? '24h' : '12h')"
+      >
+      </lib-button>
+    </div>
+  </div>
+</div>

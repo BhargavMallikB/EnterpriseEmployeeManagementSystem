@@ -1,0 +1,33 @@
+<div class="stepper" [ngClass]="orientation">
+  <div
+    *ngFor="let step of steps; let i = index"
+    class="step"
+    [class.active]="i === currentStep"
+    [class.completed]="i < currentStep"
+    (click)="goToStep(i)"
+    [class.clickable]="clickable"
+  >
+    <span class="step-label">{{ step }}</span>
+    <span *ngIf="(step === 'Submit' || step === 'Confirmation') && i > currentStep" class="step-blocked" title="Blocked">
+      &#10006;
+    </span>
+  </div>
+</div>
+
+<!-- Example navigation buttons for multi-step form -->
+<div class="stepper-controls">
+  <lib-button
+    [label]="'Previous'"
+    [variant]="'secondary'"
+    [size]="'small'"
+    [disabled]="currentStep === 0"
+    (clicked)="prevStep()"
+  ></lib-button>
+  <lib-button
+    [label]="'Next'"
+    [variant]="'primary'"
+    [size]="'small'"
+    [disabled]="currentStep === steps.length - 1"
+    (clicked)="nextStep()"
+  ></lib-button>
+</div>

@@ -1,0 +1,30 @@
+<div class="textarea-container">
+  <label *ngIf="label" class="textarea-label">
+    {{ label }}
+    <span *ngIf="required" class="textarea-required">*</span>
+    <span *ngIf="info" class="textarea-info" [title]="info">&#9432;</span>
+  </label>
+  <div
+    class="textarea-wrapper"
+    [class.textarea-disabled]="disabled"
+    [class.textarea-error]="invalid"
+  >
+    <textarea
+      #textareaRef
+      [attr.placeholder]="placeholder"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [attr.maxLength]="maxLength"
+      [rows]="rows"
+      [cols]="cols"
+      [(ngModel)]="value"
+      (ngModelChange)="onInput($event)"
+      (blur)="onBlur()"
+      class="textarea-field"
+    ></textarea>
+    <span *ngIf="isClearable" class="textarea-clear" (click)="clearTextarea()"
+      >✖️</span
+    >
+  </div>
+  <div *ngIf="showError" class="textarea-error-message">{{ errorMessage }}</div>
+</div>

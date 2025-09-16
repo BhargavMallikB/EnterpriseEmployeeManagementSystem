@@ -1,0 +1,81 @@
+@use "../../styles//variables" as *;
+
+.breadcrumb-container {
+  background: $breadcrumb-bg;
+  border-radius: $radius-xlarge;
+  padding: $spacing-xxl $spacing-xxl $spacing-xl $spacing-xxl;
+  margin-bottom: $spacing-xxl;
+  box-shadow: 0 2px 8px rgba(30,34,90,0.04);
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+.breadcrumb-title {
+  font-size: $font-size-xl;
+  font-weight: 600;
+  color: $breadcrumb-title-color;
+  margin-bottom: $spacing-xl;
+  letter-spacing: 0.01em;
+}
+.breadcrumb {
+  background: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  font-size: $font-size-lg;
+  font-family: inherit;
+}
+.breadcrumb-item {
+  color: $breadcrumb-item-color;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: $font-size-md;
+}
+.breadcrumb-item .fa,
+.breadcrumb-item .fa-solid,
+.breadcrumb-item .fa-regular,
+.breadcrumb-item .fa-home {
+  color: $icon-color;
+  font-size: 1.18em;
+  margin-right: 0.3em;
+}
+.breadcrumb-item a {
+  color: $breadcrumb-item-color;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  font-size: $font-size-md;
+}
+.breadcrumb-item a:hover {
+  color: $primary-color;
+  text-decoration: underline;
+}
+.breadcrumb-separator {
+  color: $breadcrumb-separator-color;
+  margin: 0 0.7em;
+  font-size: 1.18em;
+  user-select: none;
+}
+.breadcrumb-item.active {
+  color: $breadcrumb-item-color;
+  font-weight: 500;
+}
+@media (max-width: 600px) {
+  .breadcrumb-container {
+    padding: $spacing-lg 0.5rem 0.7rem 0.5rem;
+  }
+  .breadcrumb-title {
+    font-size: $font-size-sm;
+    margin-bottom: 0.7rem;
+  }
+  .breadcrumb {
+    font-size: $font-size-base;
+  }
+  .breadcrumb-item {
+    font-size: $font-size-base;
+  }
+  .breadcrumb-separator {
+    margin: 0 0.4em;
+  }
+} 

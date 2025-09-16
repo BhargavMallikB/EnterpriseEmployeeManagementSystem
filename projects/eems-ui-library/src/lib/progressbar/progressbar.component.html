@@ -1,0 +1,13 @@
+<div class="progressbar-container" [style.height]="height">
+  <div 
+    class="progressbar-fill" 
+    [style.width.%]="value"
+    [style.backgroundColor]="color">
+    <span *ngIf="showValue && valuePosition === 'inside'" class="progressbar-text">
+      {{ value }}%
+    </span>
+  </div>
+  <span *ngIf="showValue && valuePosition === 'outside'" class="progressbar-text-outside">
+    {{ value }}%
+  </span>
+</div>

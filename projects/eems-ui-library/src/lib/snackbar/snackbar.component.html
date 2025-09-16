@@ -1,0 +1,76 @@
+@if (shouldShow) {
+  <div 
+    class="snackbar" 
+    [ngClass]="{
+  'snackbar-success': type === 'success',
+  'snackbar-error': type === 'error',
+  'snackbar-warning': type === 'warning',
+  'snackbar-info': type === 'info',
+  'position-center': position === 'center',
+  'position-top-center': position === 'top-center',
+  'position-top-right': position === 'top-right',
+  'position-top-left': position === 'top-left',
+  'position-bottom-center': position === 'bottom-center',
+  'position-bottom-right': position === 'bottom-right',
+  'position-bottom-left': position === 'bottom-left'
+    }"
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+  >
+    <div class="snackbar-content">
+      <!-- Prefix Icon -->
+  @if (shouldShowIcon && iconPosition === 'prefix' && icon) {
+        <span class="snackbar-icon snackbar-icon-prefix">
+          <fa-icon [icon]="icon!"></fa-icon>
+        </span>
+      }
+      
+      <!-- Custom Content Slot -->
+  @if (showCustomContent) {
+        <div class="snackbar-custom-content">
+          <ng-content></ng-content>
+        </div>
+      } @else {
+        <!-- Default Message -->
+        <div class="snackbar-text">
+          <div class="snackbar-title">{{ getTitle() }}</div>
+          <div class="snackbar-message">{{ message }}</div>
+        </div>
+      }
+      
+      <!-- Suffix Icon -->
+  @if (shouldShowIcon && iconPosition === 'suffix' && icon) {
+        <span class="snackbar-icon snackbar-icon-suffix">
+          <fa-icon [icon]="icon!"></fa-icon>
+        </span>
+      } 
+      
+      <!-- Action Button -->
+  @if (actionButtonText) {
+        <lib-button 
+          class="snackbar-action-button"
+          [label]="actionButtonText"
+          [variant]="actionButtonVariant"
+          [size]="actionButtonSize"
+          [suppressAlert]="true"
+          (clicked)="onActionClick()"
+        >
+        </lib-button>
+      }
+      
+      <!-- Close Button -->
+  @if (dismissible) {
+        <lib-button 
+          class="snackbar-close"
+          label="×"
+          [plain]="true"
+          [size]="'small'"
+          [suppressAlert]="true"
+          (clicked)="onDismiss()"
+          aria-label="Close"
+        >
+        </lib-button>
+      }
+    </div>
+  </div>
+} 

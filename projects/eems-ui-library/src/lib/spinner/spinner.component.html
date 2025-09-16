@@ -1,0 +1,70 @@
+<div *ngIf="show" class="spinner-wrapper">
+  <ng-container [ngSwitch]="type">
+    <!-- Faded Segments Spinner -->
+    <div *ngSwitchCase="'faded-segments'" class="faded-segments-spinner" [ngStyle]="{ width: size + 'px', height: size + 'px' }">
+      <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="'0 0 40 40'">
+        <g>
+          <g *ngFor="let i of [].constructor(12); let idx = index">
+            <rect
+              [attr.x]="19"
+              [attr.y]="6"
+              [attr.width]="2"
+              [attr.height]="8"
+              [attr.rx]="1"
+              [attr.ry]="1"
+              [attr.transform]="'rotate(' + (idx * 30) + ' 20 20)'"
+              [attr.fill]="color"
+              [attr.opacity]="(idx + 1) / 12"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+    <!-- Circular Spinner -->
+    <div *ngSwitchCase="'circular'" class="spinner" [ngStyle]="{ width: size + 'px', height: size + 'px', borderTopColor: color }"></div>
+
+    <!-- Dual Ring Spinner -->
+    <div *ngSwitchCase="'dual-ring'" class="dual-ring" [ngStyle]="{ width: size + 'px', height: size + 'px', borderColor: color }"></div>
+
+    <!-- Dots Spinner -->
+    <div *ngSwitchCase="'dots'" class="dots-spinner" [ngStyle]="{ width: size + 'px', height: size/2 + 'px' }">
+      <div class="dot" [ngStyle]="{ background: color }"></div>
+      <div class="dot" [ngStyle]="{ background: color }"></div>
+    </div>
+
+    <!-- Bar Spinner -->
+    <div *ngSwitchCase="'bar'" class="bar-spinner" [ngStyle]="{ width: size * 2 + 'px', height: '6px', background: color }"></div>
+
+    <!-- Half Circle Spinner -->
+    <div *ngSwitchCase="'half-circle'" class="half-circle-spinner" [ngStyle]="{ width: size + 'px', height: size + 'px', borderTopColor: color }"></div>
+
+    <!-- Pulse Spinner -->
+    <div *ngSwitchCase="'pulse'" class="pulse-spinner" [ngStyle]="{ width: size + 'px', height: size + 'px', background: color }"></div>
+
+    <!-- Segmented Spinner -->
+    <div *ngSwitchCase="'segmented'" class="segmented-spinner" [ngStyle]="{ width: size + 'px', height: size + 'px' }">
+      <svg [attr.width]="size" [attr.height]="size" viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="16" stroke="#eee" stroke-width="4" fill="none"/>
+        <path d="M20 4 a16 16 0 0 1 0 32" [attr.stroke]="color" stroke-width="4" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Sun Spinner -->
+    <div *ngSwitchCase="'sun'" class="sun-spinner" [ngStyle]="{ width: size + 'px', height: size + 'px' }">
+      <svg [attr.width]="size" [attr.height]="size" viewBox="0 0 40 40">
+        <g>
+          <circle cx="20" cy="20" r="6" [attr.fill]="color"/>
+          <g>
+            <line *ngFor="let i of [0,1,2,3,4,5,6,7]" [attr.x1]="20" [attr.y1]="4" [attr.x2]="20" [attr.y2]="10" [attr.transform]="'rotate(' + (i*45) + ' 20 20)'" [attr.stroke]="color" stroke-width="2"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Striped Bar Spinner -->
+    <div *ngSwitchCase="'striped-bar'" class="striped-bar-spinner" [ngStyle]="{ width: size * 2 + 'px', height: '6px' }">
+      <div class="stripes"></div>
+    </div>
+  </ng-container>
+  <div class="spinner-message" *ngIf="message">{{ message }}</div>
+</div>

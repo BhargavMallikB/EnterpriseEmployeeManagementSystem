@@ -1,0 +1,522 @@
+@use "../../styles/variables" as *;
+
+.snackbar {
+  position: fixed;
+  min-width: 400px;
+  max-width: 600px;
+  z-index: $z-index-modal;
+  box-shadow: $shadow-medium;
+  border-radius: $radius-large;
+  padding: $spacing-lg $spacing-xl;
+  font-size: $font-size-base;
+  line-height: 1.4;
+  background: $dark-color;
+  border-left: 4px solid;
+  animation: slideInRight $animation-normal ease-out;
+  color: white;
+  
+  &.position-top-center {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: slideInTopCenter $animation-normal ease-out;
+  }
+  
+  &.position-top-right {
+    top: 20px;
+    right: 20px;
+    animation: slideInRight $animation-normal ease-out;
+  }
+  
+  &.position-top-left {
+    top: 20px;
+    left: 20px;
+    animation: slideInLeft $animation-normal ease-out;
+  }
+  
+  &.position-bottom-center {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: slideInBottomCenter $animation-normal ease-out;
+  }
+  
+  &.position-bottom-right {
+    bottom: 20px;
+    right: 20px;
+    animation: slideInRight $animation-normal ease-out;
+  }
+  
+  &.position-bottom-left {
+    bottom: 20px;
+    left: 20px;
+    animation: slideInLeft $animation-normal ease-out;
+  }
+  
+  &.position-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slideInCenter $animation-normal ease-out;
+  }
+
+  &.snackbar-success {
+    background: $success-color;
+    border-left-color: $success-color;
+    color: white;
+    
+    .snackbar-icon {
+      color: white;
+    }
+    
+    .snackbar-title {
+      color: white;
+    }
+    
+    .snackbar-message {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .snackbar-close ::ng-deep .btn {
+      color: white !important;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+    
+    .snackbar-action-button ::ng-deep .btn {
+      // Ensure action button has good contrast on success background
+      color: white !important;
+      border-color: white !important;
+      background: transparent !important;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+  }
+
+  &.snackbar-error {
+    background: $danger-color;
+    border-left-color: $danger-color;
+    color: white;
+    
+    .snackbar-icon {
+      color: white;
+    }
+    
+    .snackbar-title {
+      color: white;
+    }
+    
+    .snackbar-message {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .snackbar-close ::ng-deep .btn {
+      color: white !important;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+    
+    .snackbar-action-button ::ng-deep .btn {
+      // Ensure action button has good contrast on error background
+      color: white !important;
+      border-color: white !important;
+      background: transparent !important;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+  }
+
+  &.snackbar-warning {
+    background: $warning-color;
+    border-left-color: $warning-color;
+    color: $dark-color;
+    
+    .snackbar-icon {
+      color: $dark-color;
+    }
+    
+    .snackbar-title {
+      color: $dark-color;
+    }
+    
+    .snackbar-message {
+      color: rgba(42, 49, 66, 0.9);
+    }
+    
+    .snackbar-close ::ng-deep .btn {
+      color: $dark-color !important;
+      
+      &:hover {
+        background: rgba(42, 49, 66, 0.1) !important;
+      }
+    }
+    
+    .snackbar-action-button ::ng-deep .btn {
+      // Ensure action button has good contrast on warning background
+      color: $dark-color !important;
+      border-color: $dark-color !important;
+      
+      &:hover {
+        background: rgba(42, 49, 66, 0.1) !important;
+      }
+    }
+  }
+
+  &.snackbar-info {
+    background: $info-color;
+    border-left-color: $info-color;
+    color: white;
+    
+    .snackbar-icon {
+      color: white;
+    }
+    
+    .snackbar-title {
+      color: white;
+    }
+    
+    .snackbar-message {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .snackbar-close ::ng-deep .btn {
+      color: white !important;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+    
+    .snackbar-action-button ::ng-deep .btn {
+      // Ensure action button has good contrast on info background
+      color: white !important;
+      border-color: white !important;
+      background: transparent !important;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+  }
+}
+
+.snackbar-content {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.snackbar-icon {
+  font-size: $font-size-lg;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  
+  fa-icon {
+    display: block;
+  }
+  
+  &.snackbar-icon-prefix {
+    margin-right: $spacing-sm;
+  }
+  
+  &.snackbar-icon-suffix {
+    margin-left: $spacing-sm;
+  }
+}
+
+.snackbar-text {
+  flex: 1;
+  min-width: 0; // Allow text to shrink
+}
+
+  .snackbar-title {
+    font-weight: 600;
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-xs;
+    color: white;
+  }
+
+.snackbar-message {
+  font-weight: 400;
+  font-size: $font-size-base;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+.snackbar-custom-content {
+  flex: 1;
+  min-width: 0; // Allow content to shrink
+}
+
+// Action button styling
+.snackbar-action-button {
+  margin-left: auto;
+  flex-shrink: 0;
+  
+  // Override button styles for action button
+  ::ng-deep .btn {
+    font-size: $font-size-sm !important;
+    padding: 0.5rem 1rem !important;
+    min-height: 36px !important;
+    min-width: auto !important;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Styling for the reusable button close button
+.snackbar-close {
+  margin-left: auto;
+  flex-shrink: 0;
+  
+  // Override button styles for close button
+  ::ng-deep .btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.25rem 0.5rem !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    font-size: $font-size-xxl !important;
+    font-weight: bold !important;
+    color: white !important;
+    opacity: 0.7;
+    transition: opacity $animation-fast;
+    
+    &:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.2) !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    
+    &:active {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Animation keyframes
+@keyframes slideInTopCenter {
+  from {
+    transform: translate(-50%, -20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottomCenter {
+  from {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInCenter {
+  from {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+// Exit animations
+.snackbar.snackbar-exit {
+  animation: slideOutRight $animation-normal ease-in forwards;
+  
+  &.position-top-center,
+  &.position-bottom-center {
+    animation: slideOutTopCenter $animation-normal ease-in forwards;
+  }
+  
+  &.position-top-left,
+  &.position-bottom-left {
+    animation: slideOutLeft $animation-normal ease-in forwards;
+  }
+  
+  &.position-center {
+    animation: slideOutCenter $animation-normal ease-in forwards;
+  }
+}
+
+@keyframes slideOutTopCenter {
+  from {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -20px);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutCenter {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .snackbar {
+    min-width: 300px;
+    max-width: 90vw;
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-sm;
+  }
+  
+  .snackbar-content {
+    gap: $spacing-xs;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .snackbar-icon {
+    font-size: $font-size-base;
+    
+    &.snackbar-icon-prefix {
+      margin-right: 0;
+      margin-bottom: $spacing-xs;
+    }
+    
+    &.snackbar-icon-suffix {
+      margin-left: 0;
+      margin-top: $spacing-xs;
+    }
+  }
+  
+  .snackbar-title {
+    font-size: $font-size-base;
+  }
+  
+  .snackbar-message {
+    font-size: $font-size-sm;
+  }
+  
+  .snackbar-action-button {
+    margin-left: 0;
+    margin-top: $spacing-sm;
+    align-self: flex-end;
+  }
+  
+  .snackbar-close {
+    margin-left: 0;
+    margin-top: $spacing-sm;
+    align-self: flex-end;
+  }
+}
+
+// Progress bar for auto-dismiss (optional enhancement)
+.snackbar-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 $radius-large $radius-large;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: currentColor;
+    animation: progressBar var(--auto-dismiss-delay, 5s) linear forwards;
+  }
+}
+
+@keyframes progressBar {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+} 

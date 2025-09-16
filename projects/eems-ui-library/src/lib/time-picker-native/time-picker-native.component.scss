@@ -1,0 +1,247 @@
+@use "../../styles/variables" as *;
+
+
+::ng-deep .tp-clock-icon,
+.tp-clock-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  z-index: 10 !important;
+}
+::ng-deep .tp-clock-icon [btn__icon],
+.tp-clock-icon [btn__icon] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
+}
+::ng-deep .tp-clock-icon svg,
+.tp-clock-icon svg {
+  width: 24px !important;
+  height: 24px !important;
+  display: block !important;
+  fill: none !important;
+  stroke: #888 !important;
+}
+@media (max-width: 600px) {
+  .tp-clock-icon,
+  ::ng-deep .tp-clock-icon {
+    min-width: 28px !important;
+    min-height: 28px !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .tp-clock-icon [btn__icon],
+  ::ng-deep .tp-clock-icon [btn__icon] {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .tp-clock-icon svg,
+  ::ng-deep .tp-clock-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+// Ensure clear icon is always visible in input-field
+::ng-deep .input-clear {
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+}
+
+.time-picker-native-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  position: relative;
+  font-family: inherit;
+  width: 100%;
+  max-width: 340px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.tp-clock-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  min-width: auto;
+  min-height: auto;
+
+  &:hover {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  [btn__icon] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.tp-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 10;
+  background: $input-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-large;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 12px;
+  box-sizing: border-box;
+  font-size: $font-size-base;
+  width: 340px;
+  max-width: 90vw;
+  right: auto;
+}
+
+.tp-dropdown-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tp-hour, .tp-minute, .tp-ampm {
+  font-size: 1em;
+  padding: 2px 6px;
+  border-radius: $radius-small;
+  border: 1px solid $input-border-color;
+  width: auto;
+  min-width: 3.5em;
+  box-sizing: border-box;
+}
+
+.tp-set {
+  margin-left: 8px;
+  min-width: 2.2em;
+  min-height: 2.2em;
+}
+
+.tp-format-toggle {
+  margin-top: 8px;
+  text-align: right;
+}
+
+// Responsive breakpoints
+@media (max-width: 1150px) {
+  .time-picker-native-wrapper { max-width: 1000px; font-size: 1.05em; }
+  .tp-dropdown { width: 90vw; font-size: 1.05em; }
+}
+@media (max-width: 1100px) {
+  .time-picker-native-wrapper { max-width: 950px; font-size: 1.04em; }
+  .tp-dropdown { width: 88vw; font-size: 1.04em; }
+}
+@media (max-width: 1050px) {
+  .time-picker-native-wrapper { max-width: 900px; font-size: 1.03em; }
+  .tp-dropdown { width: 86vw; font-size: 1.03em; }
+}
+@media (max-width: 1000px) {
+  .time-picker-native-wrapper { max-width: 850px; font-size: 1.02em; }
+  .tp-dropdown { width: 84vw; font-size: 1.02em; }
+}
+@media (max-width: 950px) {
+  .time-picker-native-wrapper { max-width: 800px; font-size: 1.01em; }
+  .tp-dropdown { width: 82vw; font-size: 1.01em; }
+}
+@media (max-width: 900px) {
+  .time-picker-native-wrapper { max-width: 750px; font-size: 1em; }
+  .tp-dropdown { width: 80vw; font-size: 1em; }
+}
+@media (max-width: 850px) {
+  .time-picker-native-wrapper { max-width: 700px; font-size: 0.99em; }
+  .tp-dropdown { width: 78vw; font-size: 0.99em; }
+}
+@media (max-width: 800px) {
+  .time-picker-native-wrapper { max-width: 650px; font-size: 0.98em; }
+  .tp-dropdown { width: 76vw; font-size: 0.98em; }
+}
+@media (max-width: 750px) {
+  .time-picker-native-wrapper { max-width: 600px; font-size: 0.97em; }
+  .tp-dropdown { width: 74vw; font-size: 0.97em; }
+}
+@media (max-width: 700px) {
+  .time-picker-native-wrapper { max-width: 550px; font-size: 0.96em; }
+  .tp-dropdown { width: 72vw; font-size: 0.96em; }
+}
+@media (max-width: 650px) {
+  .time-picker-native-wrapper { max-width: 500px; font-size: 0.95em; }
+  .tp-dropdown { width: 70vw; font-size: 0.95em; }
+}
+@media (max-width: 600px) {
+  .time-picker-native-wrapper { max-width: 450px; font-size: 0.94em; }
+  .tp-dropdown { width: 68vw; font-size: 0.94em; }
+  .tp-dropdown-row { flex-direction: column; align-items: stretch; gap: 6px; }
+  .tp-set { width: 100%; margin-left: 0; }
+}
+@media (max-width: 550px) {
+  .time-picker-native-wrapper { max-width: 400px; font-size: 0.93em; }
+  .tp-dropdown { width: 66vw; font-size: 0.93em; }
+}
+@media (max-width: 500px) {
+  .time-picker-native-wrapper { max-width: 350px; font-size: 0.92em; }
+  .tp-dropdown { width: 64vw; font-size: 0.92em; }
+}
+@media (max-width: 450px) {
+  .time-picker-native-wrapper { max-width: 300px; font-size: 0.91em; }
+  .tp-dropdown { width: 62vw; font-size: 0.91em; }
+}
+@media (max-width: 400px) {
+  .time-picker-native-wrapper { max-width: 250px; font-size: 0.9em; }
+  .tp-dropdown { width: 60vw; font-size: 0.9em; }
+}
+@media (max-width: 350px) {
+  .time-picker-native-wrapper { max-width: 200px; font-size: 0.89em; }
+  .tp-dropdown { width: 58vw; font-size: 0.89em; }
+}
+@media (max-width: 300px) {
+  .time-picker-native-wrapper { max-width: 150px; font-size: 0.88em; }
+  .tp-dropdown { width: 56vw; font-size: 0.88em; }
+}
+@media (max-width: 250px) {
+  .time-picker-native-wrapper { max-width: 120px; font-size: 0.87em; }
+  .tp-dropdown { width: 54vw; font-size: 0.87em; }
+}
+@media (max-width: 200px) {
+  .time-picker-native-wrapper { max-width: 100px; font-size: 0.86em; }
+  .tp-dropdown { width: 52vw; font-size: 0.86em; }
+}
+
+// ::ng-deep for app-button styling
+::ng-deep app-button .btn {
+  border-radius: $radius-large !important;
+  font-size: inherit !important;
+  min-width: 2.2em;
+  min-height: 2.2em;
+  padding: 0.5em 1.5em;
+  transition: font-size 0.2s, padding 0.2s;
+}

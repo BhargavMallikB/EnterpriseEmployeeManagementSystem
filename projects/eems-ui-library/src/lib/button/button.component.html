@@ -1,0 +1,28 @@
+<button
+  [type]="type"
+  [class]="
+    'btn btn-' + variant +
+    ' btn-' + size +
+    (fab ? ' btn-fab' : '') +
+    (plain ? ' btn-plain' : '') +
+    (variant === 'link' ? ' btn-link' : '') +
+    (variant === 'icon' ? ' btn-icon' : '') +
+    (nonClickable ? ' btn-non-clickable' : '')
+  "
+  [disabled]="disabled || loading"
+  (click)="onClick($event)"
+>
+  @if (icon && iconPosition === 'left' && !loading) {
+    <span class="btn__icon btn__icon-left"><i [class]="icon"></i></span>
+  }
+  <ng-content select="[btn__icon]"></ng-content>
+  @if (loading) {
+    <span class="btn__loader"></span>
+  }
+  @if (displayLabel && !loading) {
+    <span class="btn__text">{{ displayLabel }}</span>
+  }
+  @if (icon && iconPosition === 'right' && !loading) {
+    <span class="btn__icon btn__icon-right"><i [class]="icon"></i></span>
+  }
+</button>

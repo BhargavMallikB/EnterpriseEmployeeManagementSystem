@@ -1,0 +1,65 @@
+@use "../../styles/variables" as *;
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  background: var(--dialog-bg, white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 25rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  text-align: center;
+  font-family: $secondary-font;
+  
+}
+
+// Responsive width variants
+.dialog.xsmall { width: 95%; }
+.dialog.small { width: 90%; }
+.dialog.medium { width: 80%; }
+.dialog.large { width: 37.5rem; }
+.dialog.xlarge { width: 50rem; }
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.confirm-textbox-section {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+ app-input-field {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.textbox-error {
+  color: #dc3545;
+  font-size: 0.95rem;
+  margin-top: 0.1rem;
+}
+
+

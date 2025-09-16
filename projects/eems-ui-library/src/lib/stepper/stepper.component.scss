@@ -1,0 +1,28 @@
+@use "../../styles/variables" as *;
+
+.stepper {
+  display: flex;
+  &.vertical {
+    flex-direction: column;
+  }
+  .step {
+    cursor: default;
+    padding: $spacing-sm $spacing-lg;
+    border-bottom: 2px solid transparent;
+    &.active {
+      font-weight: bold;
+      border-color: $primary-color;
+    }
+    &.completed {
+      color: $success-color;
+    }
+    &.clickable {
+      cursor: pointer;
+    }
+  }
+}
+.stepper-controls {
+  margin-top: $spacing-xl;
+  display: flex;
+  gap: $spacing-sm;
+}

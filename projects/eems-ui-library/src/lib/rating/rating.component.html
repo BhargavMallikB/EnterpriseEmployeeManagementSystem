@@ -1,0 +1,30 @@
+<div class="rating-container">
+  <div class="overall-rating">
+    <h2>Overall Rating: {{ overallRating | number: '1.1-2' }}/5</h2>
+  </div>
+  <form (ngSubmit)="onSubmit()" *ngIf="!submitted">
+    <div *ngFor="let aspect of aspects" class="aspect-rating">
+      <label>{{ aspect }}</label>
+      <div class="stars">
+        <ng-container *ngFor="let star of [1,2,3,4,5]">
+          <span
+            class="star"
+            [class.filled]="ratings[aspect] >= star"
+            (click)="setRating(aspect, star)">
+            ★
+          </span>
+        </ng-container>
+        <span class="rating-value">{{ ratings[aspect] }}/5</span>
+      </div>
+    </div>
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+  <div *ngIf="submitted" class="submitted-ratings">
+    <h3>Submitted Ratings:</h3>
+    <ul>
+      <li *ngFor="let aspect of aspects">
+        {{ aspect }}: {{ ratings[aspect] }}/5
+      </li>
+    </ul>
+  </div>
+</div> 

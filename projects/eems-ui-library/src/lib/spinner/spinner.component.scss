@@ -1,0 +1,166 @@
+@use "../../styles/variables" as *;
+
+/* Segmented Spinner */
+.segmented-spinner svg {
+  animation: segmentedSpin 1s linear infinite;
+}
+@keyframes segmentedSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Sun Spinner */
+.sun-spinner svg {
+  animation: sunSpin 1s linear infinite;
+}
+@keyframes sunSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Striped Bar Spinner */
+.striped-bar-spinner {
+  width: 80px;
+  height: 6px;
+  background: $spinner-bg;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+.striped-bar-spinner .stripes {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(135deg, $spinner-primary 0 8px, transparent 8px 16px);
+  animation: stripesMove 1.2s linear infinite;
+}
+@keyframes stripesMove {
+  0% { left: -80px; }
+  100% { left: 80px; }
+}
+.spinner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+}
+
+/* Faded Segments Spinner */
+.faded-segments-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.faded-segments-spinner svg {
+  display: block;
+  animation: fadedSegmentsSpin 1s linear infinite;
+}
+@keyframes fadedSegmentsSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Circular Spinner */
+.spinner {
+  border: 4px solid $spinner-bg;
+  border-top: 4px solid $spinner-primary;
+  border-radius: $radius-round;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dual Ring Spinner */
+.dual-ring {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px double $spinner-primary;
+  border-radius: $radius-round;
+  animation: spin 1.2s linear infinite;
+}
+
+/* Dots Spinner */
+.dots-spinner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: $radius-round;
+  background: $spinner-primary;
+  animation: dotPulse 1s infinite alternate;
+}
+.dot:last-child {
+  animation-delay: 0.5s;
+}
+@keyframes dotPulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Bar Spinner */
+.bar-spinner {
+  width: 80px;
+  height: 6px;
+  background: $spinner-primary;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+.bar-spinner::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: rgba(255,255,255,0.3);
+  animation: barMove 1.2s linear infinite;
+}
+@keyframes barMove {
+  0% { left: 0; }
+  100% { left: 60%; }
+}
+
+/* Half Circle Spinner */
+.half-circle-spinner {
+  border: 4px solid $spinner-bg;
+  border-top: 4px solid $spinner-primary;
+  border-radius: $radius-round;
+  width: 40px;
+  height: 40px;
+  clip-path: inset(0 0 50% 0);
+  animation: spin 1s linear infinite;
+}
+
+/* Pulse Spinner */
+.pulse-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-round;
+  background: $spinner-primary;
+  animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+.spinner-message {
+  margin-top: 12px;
+  font-size: 15px;
+  color: $spinner-text;
+}

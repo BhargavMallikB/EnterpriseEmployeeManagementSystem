@@ -1,0 +1,84 @@
+@use "../../styles/variables" as *;
+
+
+.textarea-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1.2rem;
+}
+
+.textarea-label {
+  color: $label-color;
+  font-size: $font-size-md;
+  font-weight: 500;
+  margin-bottom: $spacing-xs;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+.textarea-required { color: $input-error-color; margin-left: $spacing-xs; }
+.textarea-info { color: #888; font-size: $font-size-base; margin-left: 0.3rem; cursor: pointer; }
+
+.textarea-wrapper {
+  position: relative;
+  background: $input-bg;
+  border: 1.5px solid $input-border-color;
+  border-radius: $input-radius;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: flex-start;
+}
+.textarea-wrapper.textarea-disabled {
+  background: $input-disabled-bg;
+  color: $input-disabled-color;
+  border-color: #e5e7eb;
+}
+.textarea-wrapper.textarea-error {
+  border-color: $input-error-color;
+  box-shadow: 0 0 0 1px $input-error-color;
+}
+
+.textarea-field {
+  width: 100%;
+  min-height: 3.5rem;
+  font-size: $font-size-md;
+  color: $label-color;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: vertical;
+  padding: $spacing-xs 0;
+  font-family: inherit;
+}
+
+.textarea-clear {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.7rem;
+  font-size: $font-size-md;
+  color: $icon-color;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  z-index: 2;
+  transition: color 0.15s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.textarea-clear:hover { color: $label-color; }
+
+.textarea-error-message {
+  color: $input-error-color;
+  font-size: $font-size-sm;
+  margin-top: 0.3rem;
+}
+
+// @media (max-width: 600px) {
+//   .textarea-container, .textarea-wrapper { max-width: 100%; }
+//   .textarea-field { font-size: 1rem; }
+// }

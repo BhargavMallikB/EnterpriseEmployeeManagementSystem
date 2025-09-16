@@ -1,0 +1,140 @@
+@use "../../styles/variables" as *;
+
+.input-field-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+.input-label {
+  font-size: $font-size-md;
+  color: $label-color;
+  margin-bottom: $spacing-sm;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+.input-required {
+  color: $danger-color;
+  margin-left: $spacing-xs;
+}
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1.5px solid $input-border-color;
+  border-radius: $radius-medium;
+  padding: $spacing-sm $spacing-lg;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-wrapper.input-disabled {
+  background: $input-disabled-bg;
+  color: #6c757d;
+  border-color: $input-disabled-bg;
+}
+.input-field {
+  min-height: 22px; // decreased from 30px
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: $font-size-md;
+  background: transparent;
+  color: $label-color;
+  padding: $spacing-xs 0; // decreased vertical padding
+  padding-right: 2.2rem;
+}
+.input-wrapper.input-error {
+  border: 1.5px solid $danger-color;
+  outline: none;
+  box-shadow: none;
+}
+.input-field.input-error {
+  border: none;
+  box-shadow: none;
+}
+.input-wrapper.input-dirty {
+  background: #f8fafc;
+}
+.input-field.input-touched {
+  border-bottom: none;
+}
+.input-prefix-img img,
+.input-suffix-img img {
+  height: 1.5rem;
+  width: 1.5rem;
+  object-fit: contain;
+  margin-right: $spacing-sm;
+}
+.input-suffix-img img {
+  margin-left: $spacing-sm;
+  margin-right: 0;
+}
+.input-icon {
+  color: #888;
+  font-size: 1.2rem;
+  margin: 0 $spacing-sm 0 0;
+  display: flex;
+  align-items: center;
+}
+.input-icon.input-icon-right {
+  margin: 0 0 0 $spacing-sm;
+}
+.input-clear {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.15em;
+  color: $icon-color;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  z-index: 2;
+  transition: color 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.input-clear:hover {
+  color: $label-color;
+}
+.input-info-inside {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #495057;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: #fff;
+  padding-left: 0.5rem;
+  z-index: 2;
+}
+.input-error-message {
+  color: $danger-color;
+  font-size: $font-size-sm;
+  margin-top: 0.3rem;
+}
+.input-success-message {
+  color: $input-success-color;
+  font-size: $font-size-sm;
+  margin-top: 0.3rem;
+}
+.input-size-small .input-wrapper {
+  padding: $spacing-xs $spacing-md;
+}
+.input-size-small .input-field {
+  font-size: $font-size-sm;
+  min-height: 18px; // further decrease for small size
+  padding: 2px 0; // even less vertical padding
+}
+.input-size-large .input-wrapper {
+  padding: $spacing-lg $spacing-xl;
+}
+.input-size-large .input-field {
+  font-size: $font-size-lg;
+  padding: $spacing-xl 0;
+}
+ 

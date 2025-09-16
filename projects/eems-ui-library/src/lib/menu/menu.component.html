@@ -1,0 +1,112 @@
+<!-- Menubar (Top-level navigation) -->
+<div class="menubar" *ngIf="type === 'menubar'" (clickOutside)="closeDropdown()">
+  <div class="menubar-item" *ngFor="let item of menu" [class.has-dropdown]="item.children" (click)="item.children ? toggleDropdown(item.label) : null" [class.active]="openDropdown === item.label">
+    <i *ngIf="item.icon" [class]="item.icon" style="margin-right: 0.5em;"></i>
+    {{ item.label }}
+    <i *ngIf="item.children" class="fa fa-chevron-down" style="margin-left: 0.4em; font-size: 0.9em;"></i>
+    <!-- Dropdown -->
+    <div class="menubar-dropdown" *ngIf="item.children && openDropdown === item.label">
+      <div class="menubar-dropdown-item" *ngFor="let child of item.children">
+        <i *ngIf="child.icon" [class]="child.icon" style="margin-right: 0.5em;"></i>
+        {{ child.label }}
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- TabMenu (Tabbed navigation) -->
+<div class="tabmenu" *ngIf="type === 'tabmenu'">
+  <div class="tabmenu-tab" *ngFor="let tab of menu; let i = index" [class.active]="i === selectedTabIndex" (click)="setTab(i)">
+    <i *ngIf="tab.icon" [class]="tab.icon" style="margin-right: 0.5em;"></i>
+    {{ tab.label }}
+  </div>
+</div>
+
+<!-- Overlay Menu (Floating menu) -->
+<div class="overlay-menu-wrapper" *ngIf="type === 'overlay'">
+  <button (click)="showOverlay = !showOverlay" class="overlay-btn">
+    <i class="fa fa-chevron-down"></i> Options
+  </button>
+  <div class="overlay-menu" *ngIf="showOverlay">
+    <ng-container *ngFor="let item of menu">
+      <hr *ngIf="item.separator" class="overlay-divider" />
+      <div *ngIf="!item.separator" class="overlay-menu-item">
+        <i *ngIf="item.icon" [class]="item.icon" style="margin-right: 0.7em;"></i>
+        {{ item.label }}
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Context Menu (Right-click actions) -->
+<div class="context-menu-area" *ngIf="type === 'context'" (contextmenu)="onContextMenu($event)">
+  <span>Right click to display.</span>
+  <div class="context-menu" *ngIf="contextMenuVisible" [style.left.px]="contextMenuX" [style.top.px]="contextMenuY">
+    <div class="context-menu-item" *ngFor="let item of menu">
+      <i *ngIf="item.icon" [class]="item.icon" style="margin-right: 0.5em;"></i>
+      {{ item.label }}
+    </div>
+  </div>
+</div>
+
+<!-- Horizontal MegaMenu -->
+<div class="megamenu-horizontal" *ngIf="type === 'horizontal-mega'">
+  <div class="megamenu-item" *ngFor="let item of menu">
+    <i *ngIf="item.icon" [class]="item.icon" style="margin-right: 0.5em;"></i>
+    {{ item.label }}
+    <i *ngIf="item.children" class="fa fa-chevron-down" style="margin-left: 0.4em; font-size: 0.9em;"></i>
+    <div class="megamenu-dropdown" *ngIf="item.children">
+      <div class="megamenu-group" *ngFor="let child of item.children">
+        <i *ngIf="child.icon" [class]="child.icon" style="margin-right: 0.5em;"></i>
+        {{ child.label }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PanelMenu (Collapsible grouped navigation) -->
+<div class="panelmenu" *ngIf="type === 'panel'">
+  <div class="panelmenu-group" *ngFor="let item of menu">
+    <div class="panelmenu-header" (click)="togglePanel(item)">
+      <i *ngIf="item.icon" [class]="item.icon" style="margin-right: 0.5em;"></i>
+      {{ item.label }}
+    </div>
+    <div class="panelmenu-content" *ngIf="isPanelOpen(item)">
+      <div class="panelmenu-item" *ngFor="let child of item.children">
+        <i *ngIf="child.icon" [class]="child.icon" style="margin-right: 0.5em;"></i>
+        {{ child.label }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Existing menu rendering (Plain/Tiered) -->
+<div class="menu-root" *ngIf="type === 'plain'">
+  <div class="menu-title">HIERARCHY</div>
+  <ng-container *ngFor="let item of filteredMenu">
+    <ng-template [ngTemplateOutlet]="renderMenu" [ngTemplateOutletContext]="{ $implicit: item, level: 0 }"></ng-template>
+  </ng-container>
+  <ng-template #renderMenu let-item let-level="level">
+    <ng-container *ngIf="item.separator">
+      <hr class="menu-separator" />
+    </ng-container>
+    <ng-container *ngIf="item.header">
+      <div class="menu-header">{{ item.label }}</div>
+    </ng-container>
+    <ng-container *ngIf="!item.separator && !item.header">
+    <div class="menu-item" [style.paddingLeft.px]="level * 20">
+        <span class="menu-icon"><i *ngIf="item.icon" [class]="item.icon"></i></span>
+      <span class="menu-label">{{ item.label }}</span>
+      <span *ngIf="item.children" class="menu-arrow" (click)="toggle(item)">
+        <i class="fa" [ngClass]="isOpen(item) ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      </span>
+    </div>
+    <div *ngIf="item.children && isOpen(item)">
+      <ng-container *ngFor="let child of item.children">
+        <ng-template [ngTemplateOutlet]="renderMenu" [ngTemplateOutletContext]="{ $implicit: child, level: level + 1 }"></ng-template>
+      </ng-container>
+    </div>
+    </ng-container>
+  </ng-template>
+</div>

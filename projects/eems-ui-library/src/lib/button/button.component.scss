@@ -1,0 +1,373 @@
+@use "../../styles/variables" as *;
+@use "sass:color";
+
+// Link style button
+.btn-link {
+  background: transparent !important;
+  color: #1976d2 !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-decoration: underline;
+  padding: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  font-weight: 500;
+  align-self: flex-end;
+  line-height: 1.2;
+  display: inline;
+  vertical-align: baseline;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+  white-space: nowrap;
+  outline: none !important;
+    min-height: 30px;
+    height: 30px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  opacity: 1 !important;
+  z-index: 1;
+  &:hover:not([disabled]) {
+    color: #0d47a1 !important;
+    background: none !important;
+    text-decoration: underline;
+  }
+  &:active:not([disabled]) {
+    color: #1565c0 !important;
+    background: none !important;
+  }
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// Icon-only button
+.btn-icon {
+  background: none;
+  color: #212529;
+  border: none;
+  box-shadow: none;
+  padding: 0.5rem;
+  min-width: 2.5rem;
+  min-height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .btn__icon {
+    margin: 0;
+    font-size: 1.3em;
+  }
+  .btn__text {
+    display: none;
+  }
+  &:hover:not([disabled]) {
+    background: rgba(25, 118, 210, 0.08);
+    color: #1976d2;
+  }
+  &:active:not([disabled]) {
+    background: rgba(25, 118, 210, 0.15);
+    color: #0d47a1;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  border-radius: $radius-large;
+  font-size: $font-size-base;
+  font-weight: 600;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.025em;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  background: $primary-color;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(30,34,90,0.08);
+  min-height: 44px;
+  min-width: 120px;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  vertical-align: middle;
+  position: relative;
+}
+
+.btn-primary {
+  background: $primary-color;
+  color: #fff;
+  border: 1.5px solid $primary-color;
+  &:hover:not([disabled]) {
+    background: color.adjust($primary-color, $lightness: -10%);
+    border-color: color.adjust($primary-color, $lightness: -10%);
+    color: #fff;
+    box-shadow: 0 4px 16px $btn-hover-shadow-primary;
+    transform: translateY(-1px);
+  }
+  &:active:not([disabled]) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(30,34,90,0.12);
+  }
+}
+
+.btn-secondary { 
+  background: $secondary-color; 
+  color: #fff; 
+  border: 1.5px solid $secondary-color;
+  &:hover:not([disabled]) {
+    background: color.adjust($secondary-color, $lightness: -10%);
+    border-color: color.adjust($secondary-color, $lightness: -10%);
+    color: #fff;
+    box-shadow: 0 4px 16px $btn-hover-shadow-secondary;
+    transform: translateY(-1px);
+  }
+  &:active:not([disabled]) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(30,34,90,0.12);
+  }
+}
+
+.btn-success {
+  background: $success-color;
+  color: #fff;
+  border: 1.5px solid $success-color;
+  box-shadow: 0 2px 8px rgba(25,195,125,0.12);
+  &:hover:not([disabled]) {
+    background: color.adjust($success-color, $lightness: -10%);
+    border-color: color.adjust($success-color, $lightness: -10%);
+    color: #fff;
+    box-shadow: 0 4px 16px $btn-hover-shadow-success;
+    transform: translateY(-1px);
+  }
+  &:active:not([disabled]) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(25,195,125,0.16);
+  }
+}
+
+.btn-danger { 
+  background: $danger-color; 
+  color: #fff; 
+  border: 1.5px solid $danger-color;
+  &:hover:not([disabled]) {
+    background: color.adjust($danger-color, $lightness: -10%);
+    border-color: color.adjust($danger-color, $lightness: -10%);
+    color: #fff;
+    box-shadow: 0 4px 16px $btn-hover-shadow-danger;
+    transform: translateY(-1px);
+  }
+  &:active:not([disabled]) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(30,34,90,0.12);
+  }
+}
+
+.btn-plain { 
+  background: transparent; 
+  color: #212529; 
+  border: 1.5px solid transparent; 
+  box-shadow: none; 
+  &:hover:not([disabled]) {
+    background: rgba(0,0,0,0.05);
+    color: #212529;
+    box-shadow: none;
+    transform: translateY(-1px);
+  }
+  &:active:not([disabled]) {
+    transform: translateY(0);
+    background: rgba(0,0,0,0.08);
+  }
+}
+
+.btn-custom { 
+  background: $btn-custom-color; 
+  color: #fff; 
+  border: 1.5px solid $btn-custom-color;
+  &:hover:not([disabled]) {
+    background: color.adjust($btn-custom-color, $lightness: -10%);
+    border-color: color.adjust($btn-custom-color, $lightness: -10%);
+    color: #fff;
+    box-shadow: 0 4px 16px $btn-hover-shadow-custom;
+    transform: translateY(-1px);
+  }
+  &:active:not([disabled]) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(30,34,90,0.12);
+  }
+}
+
+.btn[disabled], .btn.btn-disabled {
+  background: $input-disabled-bg !important;
+  color: #bdbdbd !important;
+  border: 1.5px solid $input-disabled-bg !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  transform: none !important;
+}
+
+.btn-small { 
+  font-size: $font-size-sm; 
+  padding: 0.5rem 1rem; 
+  min-height: 36px;
+  min-width: 100px;
+  font-weight: 500;
+}
+
+.btn-medium {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  min-height: 44px;
+  min-width: 120px;
+  font-weight: 600;
+}
+
+.btn-large { 
+  font-size: $font-size-lg; 
+  padding: 1rem 2rem; 
+  min-height: 52px;
+  min-width: 140px;
+  font-weight: 600;
+}
+
+.btn-fab {
+  border-radius: $radius-round;
+  padding: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
+  &:hover:not([disabled]) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  &:active:not([disabled]) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+}
+
+// Text styling for perfect center alignment
+.btn__text {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  margin: 0;
+  width: 1.2em;
+  height: 1.2em;
+  line-height: 1.2em;
+  flex-shrink: 0;
+}
+
+.btn__icon-left {
+  margin-right: 0.6em;
+  margin-left: 0;
+}
+
+.btn__icon-right {
+  margin-left: 0.6em;
+  margin-right: 0;
+}
+
+.btn__loader {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5em;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-non-clickable { 
+  pointer-events: none; 
+  opacity: 0.7; 
+}
+
+.btn-fab .btn__icon {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn__icon:empty {
+  display: none;
+}
+
+// Ensure perfect center alignment for text content
+.btn:not(.btn-fab) {
+  text-align: center;
+  justify-content: center;
+  
+  .btn__text {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    flex: 0 1 auto;
+  }
+}
+
+// Focus styles for accessibility
+.btn:focus-visible {
+  outline: 2px solid $primary-color;
+  outline-offset: 2px;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+    min-height: 40px;
+    min-width: 100px;
+  }
+  
+  .btn-large {
+    font-size: 1.1rem;
+    padding: 1rem 1.6rem;
+    min-height: 48px;
+    min-width: 120px;
+  }
+} 

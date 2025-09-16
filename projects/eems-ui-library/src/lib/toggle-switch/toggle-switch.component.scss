@@ -1,0 +1,117 @@
+@use "../../styles/variables" as *;
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: 'Roboto', sans-serif;
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &.sm {
+    .switch-wrapper {
+      font-size: $font-size-xs;
+      .switch-track {
+        width: 36px;
+        height: 18px;
+      }
+      .switch-thumb {
+        width: 16px;
+        height: 16px;
+        &.checked {
+          left: calc(100% - 2px - 16px);
+        }
+      }
+    }
+  }
+
+  &.md {
+    .switch-wrapper {
+      font-size: $font-size-sm;
+      .switch-track {
+        width: 48px;
+        height: 24px;
+      }
+      .switch-thumb {
+        width: 22px;
+        height: 22px;
+        &.checked {
+          left: calc(100% - 2px - 22px);
+        }
+      }
+    }
+  }
+
+  &.lg {
+    .switch-wrapper {
+      font-size: $font-size-md;
+      .switch-track {
+        width: 60px;
+        height: 30px;
+      }
+      .switch-thumb {
+        width: 28px;
+        height: 28px;
+        &.checked {
+          left: calc(100% - 2px - 28px);
+        }
+      }
+    }
+  }
+
+  .toggle-label {
+    font-weight: 500;
+    color: $toggle-text-color;
+    margin: 0 1rem 0 0;
+    display: block;
+    line-height: 1.2;
+    white-space: nowrap;
+    flex: none;
+  }
+
+  .switch-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+
+    &.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .switch-track {
+      border-radius: 999px;
+      transition: background-color $animation-normal;
+      position: relative;
+      background-color: #ccc;
+    }
+
+    .switch-thumb {
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      transform: translateY(-50%);
+      background-color: white;
+      border-radius: $radius-round;
+      transition: left $animation-normal;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+
+      &.checked {
+        // left is overridden in each size above
+      }
+    }
+
+    .switch-text {
+      min-width: 30px;
+      text-align: center;
+      color: $toggle-secondary-text;
+    }
+  }
+}

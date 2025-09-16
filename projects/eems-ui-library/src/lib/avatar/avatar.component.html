@@ -1,1 +1,21 @@
-<p>avatar works!</p>
+<div
+  class="avatar"
+  [ngClass]="[shape, size, clickable ? 'clickable' : '', status]"
+  [style.width.px]="avatarSize"
+  [style.height.px]="avatarSize"
+  [style.background-color]="!src || imageError ? bgColor : 'transparent'"
+  (click)="handleClick()"
+>
+  <img
+    *ngIf="src && !imageError"
+    [src]="src"
+    [alt]="alt"
+    (error)="handleImageError()"
+  />
+  <span *ngIf="!src || imageError">
+    {{ initials }}
+    <span *ngIf="imageError" style="margin-left:4px; color:#dc3545; font-size:1.1em;">&#10060;</span>
+  </span>
+
+  <span *ngIf="status" class="status-dot" [ngClass]="status"></span>
+</div>

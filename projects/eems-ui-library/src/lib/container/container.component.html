@@ -1,0 +1,25 @@
+<div 
+  [class]="customClass"
+  [style.display]="'flex'"
+  [style.flex-direction]="direction"
+  [style.justify-content]="justifyContent"
+  [style.align-items]="alignItems"
+  [style.flex-wrap]="wrap"
+  [style.gap]="gap"
+  [style.background-color]="backgroundColor"
+  [style.padding]="padding"
+  [style.margin]="margin"
+  [style.border-radius]="borderRadius"
+  [style.box-shadow]="boxShadow"
+  [style.width]="width"
+  [style.max-width]="maxWidth"
+  [style.min-height]="minHeight"
+>
+  <h2 *ngIf="title" class="container-title">{{ title }}</h2>
+
+  <ng-content select="[header]"></ng-content>
+
+  <ng-content></ng-content>
+
+  <ng-content select="[footer]"></ng-content>
+</div>

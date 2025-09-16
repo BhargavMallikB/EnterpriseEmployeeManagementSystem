@@ -1,0 +1,19 @@
+<div class="overlay" *ngIf="show">
+  <div class="dialog">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+    <div *ngIf="showTextbox" class="confirm-textbox-section">
+
+      <lib-input-field [type]="'text'" [label]="textboxLabel" [(ngModel)]="userInput" [error]="textboxError"
+        (valueChange)="onUserInputChange()">
+      </lib-input-field>
+
+      <div *ngIf="userInput && !isConfirmEnabled" class="textbox-error">
+        {{ textboxError }}
+      </div>
+    </div>
+    <div class="actions">
+      <ng-content select="[dialog-actions]"></ng-content>
+    </div>
+  </div>
+</div>

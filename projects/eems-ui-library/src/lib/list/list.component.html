@@ -1,0 +1,81 @@
+<!-- DataView -->
+<div class="card" *ngIf="products && products.length">
+  <div class="header">
+    <span>DataView</span>
+    <div class="view-toggle">
+      <button [class.active]="viewMode === 'list'" (click)="viewMode = 'list'">&#9776;</button>
+      <button [class.active]="viewMode === 'grid'" (click)="viewMode = 'grid'">&#9638;</button>
+    </div>
+  </div>
+  <div *ngIf="viewMode === 'list'" class="data-list">
+    <div *ngFor="let p of products" class="data-row">
+      <img [src]="p.image" class="product-img" [alt]="p.name + ' image'" />
+      <div class="product-info">
+        <div class="category">{{ p.category }}</div>
+        <div class="name">{{ p.name }}</div>
+        <div class="rating">
+          <span>{{ p.rating }}</span>
+          <span class="star">&#11088;</span>
+        </div>
+      </div>
+      <div class="status" [ngClass]="p.status">{{ p.status }}</div>
+      <div class="price">${{ p.price }}</div>
+      <div class="actions">
+        <button class="fav-btn" (click)="favorite(p)">&#10084;</button>
+        <lib-button icon="fa fa-shopping-cart" iconPosition="left" label="Buy Now" variant="success" size="medium" [suppressAlert]="true" (clicked)="buy(p)"></lib-button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="viewMode === 'grid'" class="data-grid">
+    <div *ngFor="let p of products" class="data-card">
+      <img [src]="p.image" class="product-img" [alt]="p.name + ' image'" />
+      <div class="category">{{ p.category }}</div>
+      <div class="name">{{ p.name }}</div>
+      <div class="rating">
+        <span>{{ p.rating }}</span>
+        <span class="star">&#11088;</span>
+      </div>
+      <div class="status" [ngClass]="p.status">{{ p.status }}</div>
+      <div class="price">${{ p.price }}</div>
+      <div class="actions">
+        <button class="fav-btn" (click)="favorite(p)">&#10084;</button>
+        <lib-button icon="fa fa-shopping-cart" iconPosition="left" label="Buy Now" variant="success" size="medium" [suppressAlert]="true" (clicked)="buy(p)"></lib-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PickList -->
+<div class="card" *ngIf="pickListSource && (pickListSource.length || (pickListTarget && pickListTarget.length))">
+  <div class="header">PickList</div>
+  <div class="picklist">
+    <div class="picklist-list">
+      <div *ngFor="let item of pickListSource">
+        <span>{{ item }}</span>
+        <button (click)="moveToTarget(item)">&#8594;</button>
+      </div>
+      <button (click)="moveAllToTarget()" [disabled]="pickListSource.length === 0">All &#8594;&#8594;</button>
+    </div>
+    <div class="picklist-list">
+      <div *ngFor="let item of pickListTarget">
+        <button (click)="moveToSource(item)">&#8592;</button>
+        <span>{{ item }}</span>
+      </div>
+      <button (click)="moveAllToSource()" [disabled]="pickListTarget?.length === 0">&#8592;&#8592; All</button>
+    </div>
+  </div>
+</div>
+
+<!-- OrderList -->
+<div class="card" *ngIf="orderList && orderList.length">
+  <div class="header">OrderList</div>
+  <div class="orderlist">
+    <div *ngFor="let item of orderList; let i = index" class="orderlist-row">
+      <span>{{ item }}</span>
+      <div class="orderlist-actions">
+        <button (click)="moveUp(i)" [disabled]="i === 0">&#8593;</button>
+        <button (click)="moveDown(i)" [disabled]="i === orderList.length - 1">&#8595;</button>
+      </div>
+    </div>
+  </div>
+</div>

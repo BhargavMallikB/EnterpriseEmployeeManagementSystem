@@ -1,0 +1,29 @@
+<div class="search-wrapper" [ngClass]="{ 'mobile': (isMobile$ | async) }">
+  <lib-input-field
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    [clearable]="true"
+    [showClear]="true"
+    [icon]="'🔍'"
+    [iconPosition]="'left'"
+    (valueChange)="onInput($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (keydown)="onKeyDown($event)"
+    (clear)="clearInput()"
+  ></lib-input-field>
+  
+  <ul *ngIf="dropdownOpen && filteredSuggestions.length" id="autocomplete-list" class="autocomplete-list" role="listbox">
+    <li *ngFor="let option of filteredSuggestions; let i = index"
+        [id]="'option-' + i"
+        [class.active]="i === activeIndex"
+        (mousedown)="$event.preventDefault()"
+        (click)="selectOption(option)"
+        role="option"
+        [attr.aria-selected]="i === activeIndex">
+      <ng-container *ngIf="suggestionTemplate; else defaultOption" [ngTemplateOutlet]="suggestionTemplate" [ngTemplateOutletContext]="{ $implicit: option }"></ng-container>
+      <ng-template #defaultOption>{{ displayWith(option) }}</ng-template>
+    </li>
+  </ul>
+</div>

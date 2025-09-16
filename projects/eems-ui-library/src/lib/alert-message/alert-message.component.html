@@ -1,0 +1,72 @@
+@if (shouldShow()) {
+  <div 
+    class="alert-message" 
+    [ngClass]="{
+      'alert-success': type() === 'success',
+      'alert-error': type() === 'error',
+      'alert-warning': type() === 'warning',
+      'alert-info': type() === 'info',
+      'toast': isToast(),
+      'alert': !isToast(),
+      'position-top-center': position() === 'top-center' && isToast(),
+      'position-top-right': position() === 'top-right' && isToast(),
+      'position-top-left': position() === 'top-left' && isToast(),
+      'position-bottom-center': position() === 'bottom-center' && isToast(),
+      'position-bottom-right': position() === 'bottom-right' && isToast(),
+      'position-bottom-left': position() === 'bottom-left' && isToast()
+    }"
+  >
+    <div class="alert-content">
+      <!-- Prefix Icon -->
+      @if (shouldShowIcon() && iconPosition() === 'prefix' && icon()) {
+        <span class="alert-icon alert-icon-prefix">
+          <fa-icon [icon]="icon()!"></fa-icon>
+        </span>
+      }
+      
+      <!-- Custom Content Slot -->
+      @if (showCustomContent()) {
+        <div class="alert-custom-content">
+          <ng-content></ng-content>
+        </div>
+      } @else {
+        <!-- Default Message -->
+        <span class="alert-text">{{ message() }}</span>
+      }
+      
+      <!-- Suffix Icon -->
+      @if (shouldShowIcon() && iconPosition() === 'suffix' && icon()) {
+        <span class="alert-icon alert-icon-suffix">
+          <fa-icon [icon]="icon()!"></fa-icon>
+        </span>
+      }
+      
+      <!-- Action Button -->
+      @if (actionButtonText()) {
+        <lib-button 
+          class="alert-action-button"
+          [label]="actionButtonText()"
+          [variant]="actionButtonVariant()"
+          [size]="actionButtonSize()"
+          [suppressAlert]="true"
+          (clicked)="onActionClick()"
+        >
+        </lib-button>
+      }
+      
+      <!-- Close Button -->
+      @if (dismissible()) {
+        <lib-button 
+          class="alert-close"
+          label="×"
+          [plain]="true"
+          [size]="'small'"
+          [suppressAlert]="true"
+          (clicked)="onDismiss()"
+          aria-label="Close"
+        >
+        </lib-button>
+      }
+    </div>
+  </div>
+}

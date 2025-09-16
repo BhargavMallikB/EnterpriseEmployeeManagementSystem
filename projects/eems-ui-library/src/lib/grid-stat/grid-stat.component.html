@@ -1,0 +1,15 @@
+<div class="grid-stat-card" [ngClass]="[color, size]">
+  <div class="header">
+    <span class="value">{{ value }}</span>
+    <span class="change">
+      ({{ change }}
+      <span [ngClass]="{'up': isIncrease, 'down': !isIncrease}">
+        {{ isIncrease ? '↑' : '↓' }}
+      </span>)
+    </span>
+  </div>
+  <div class="subtitle">{{ subtitle }}</div>
+  <div class="chart-placeholder">
+    <!-- Replace with real chart later -->
+  </div>
+</div>

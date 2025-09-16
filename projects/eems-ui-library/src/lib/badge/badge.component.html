@@ -1,0 +1,15 @@
+<span
+  class="badge"
+  [ngClass]="[
+    'badge--' + size,
+    'badge--' + variant,
+    'badge--' + color,
+    'badge--' + position,
+    rounded ? 'badge--rounded' : '',
+    isDot ? 'badge--dot' : ''
+  ]"
+>
+  <ng-container *ngIf="!isDot">
+    {{ value }}
+  </ng-container>
+</span>

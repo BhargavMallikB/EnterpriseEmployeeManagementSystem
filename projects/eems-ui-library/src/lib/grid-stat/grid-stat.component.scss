@@ -1,0 +1,104 @@
+// Size classes for grid-stat
+.grid-stat-card.small {
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  min-height: 80px;
+}
+.grid-stat-card.medium {
+  font-size: 1rem;
+  padding: 1rem;
+  min-height: 120px;
+}
+.grid-stat-card.large {
+  font-size: 1.25rem;
+  padding: 1.5rem;
+  min-height: 160px;
+}
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.grid-stat-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 150px;
+  min-height: 120px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.grid-stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.grid-stat-card .top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.grid-stat-card .big-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.grid-stat-card .change {
+  font-size: 0.9rem;
+}
+
+.grid-stat-card .change .up {
+  color: #4caf50;
+}
+.grid-stat-card .change .down {
+  color: #f44336;
+}
+
+.grid-stat-card .subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+.grid-stat-card .chart-placeholder {
+  margin-top: auto;
+  height: 40px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.grid-stat-card.purple { background-color: #7e57c2; }
+.grid-stat-card.blue   { background-color: #42a5f5; }
+.grid-stat-card.orange { background-color: #ffa726; }
+.grid-stat-card.red    { background-color: #ef5350; }
+
+@media (max-width: 600px) {
+  :host {
+    max-width: 100%;
+    padding: 0 0.2rem;
+  }
+  .grid-stat-card {
+    padding: 0.5rem;
+    font-size: 0.95rem;
+  }
+  .grid-stat-card .big-value {
+    font-size: 1.2rem;
+  }
+  .grid-stat-card .subtitle {
+    font-size: 0.85rem;
+  }
+  .grid-stat-card .chart-placeholder {
+    height: 24px;
+  }
+}

@@ -1,0 +1,499 @@
+@use "../../styles/variables" as *;
+
+::ng-deep .calendar-close-btn .btn {
+  background: #6c757d !important; /* Bootstrap secondary gray */
+  color: #fff !important;
+  border: 1.5px solid #6c757d !important;
+  width: 100%;
+  min-width: 0;
+  padding: 0.3em 1.2em;
+  font-size: inherit;
+  box-sizing: border-box;
+  border-radius: $radius-large;
+  transition: font-size 0.2s, padding 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  min-height: 0;
+}
+::ng-deep .calendar-close-btn .btn:hover,
+::ng-deep .calendar-close-btn .btn:focus {
+  background: #5a6268 !important;
+  border-color: #5a6268 !important;
+  color: #fff !important;
+}
+/* Style the Today button in the calendar nav */
+::ng-deep .calendar-nav app-button[aria-label='Today'] .btn {
+  background: #1976d2 !important; /* Material blue 700 */
+  color: #fff !important;
+  border: 1.5px solid #1976d2 !important;
+}
+::ng-deep .calendar-nav app-button[aria-label='Today'] .btn:hover,
+::ng-deep .calendar-nav app-button[aria-label='Today'] .btn:focus {
+  background: #1565c0 !important; /* Slightly darker blue on hover */
+  border-color: #1565c0 !important;
+  color: #fff !important;
+}
+
+.date-picker-native-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  position: relative;
+  font-family: inherit;
+  width: 100%;
+  max-width: 340px;
+}
+
+/* Input container for positioning */
+.input-container {
+  position: relative;
+}
+
+/* Calendar icon button positioning */
+.dp-calendar-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  pointer-events: auto;
+
+  &:hover {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  [btn__icon] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 24px !important;
+    height: 24px !important;
+    margin: 0 !important;
+
+    svg {
+      width: 24px !important;
+      height: 24px !important;
+      display: block !important;
+      fill: none !important;
+      stroke: #888 !important;
+    }
+  }
+}
+
+.calendar-container {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 10;
+  background: $input-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-large;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 12px;
+  box-sizing: border-box;
+  font-size: $font-size-base;
+  transition: width 0.2s, font-size 0.2s;
+  /* sensible defaults (will be overridden per breakpoint) */
+  width: 340px;
+  max-width: 90vw;
+  right: auto;
+}
+
+/* Controls */
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+
+  select,
+  input[type="number"] {
+    font-size: 1em;
+    padding: 2px 6px;
+    border-radius: $radius-small;
+    border: 1px solid $input-border-color;
+    width: auto;
+    min-width: 3.5em;
+    box-sizing: border-box;
+  }
+
+  app-button {
+    min-width: 2.2em;
+    min-height: 2.2em;
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+  .calendar-close-btn {
+    margin-left: 8px;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Target the actual button inside app-button for responsiveness */
+  ::ng-deep .calendar-close-btn .btn {
+    width: 100%;
+    min-width: 0;
+    padding: 0.5em 1.5em;
+    font-size: 1em;
+    box-sizing: border-box;
+    border-radius: $radius-large;
+    transition: font-size 0.2s, padding 0.2s;
+  }
+}
+
+.calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calendar-row {
+  display: flex;
+  gap: 2px;
+}
+
+.calendar-header {
+  font-weight: 600;
+}
+
+.calendar-cell  {
+  width: 2.2em;
+  height: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-small;
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &.selected {
+    background: $primary-color;
+    color: #fff;
+    border: 1px solid $primary-color;
+  }
+  &.today:not(.selected) {
+    border: 1px solid $primary-color;
+  }
+  &.unavailable,
+  &:disabled {
+    color: #bbb;
+    background: #fafafa;
+    cursor: not-allowed;
+  }
+}
+
+.calendar-header-cell {
+  background: $input-disabled-bg;
+  color: #555;
+  cursor: default;
+}
+
+/* =========================
+   Responsive Breakpoints (every 100px)
+   ========================= */
+
+/* 1100px */
+@media (max-width: 1100px) {
+  .date-picker-native-wrapper { font-size: 1rem; }
+  .calendar-container {
+    width: 340px;
+    max-width: 90vw;
+    left: 0;
+    right: auto;
+    font-size: 1rem;
+    padding: 12px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 18px; height: 18px; }
+  .calendar-cell { width: 2.2em; height: 2.2em; font-size: 1rem; }
+  .calendar-nav select, .calendar-nav input { font-size: 1rem; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 1rem;
+    padding: 2px 6px;
+    min-width: 3.5em;
+  }
+  .calendar-close-btn { font-size: 1rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 1rem; }
+}
+
+/* 1000px */
+@media (max-width: 1000px) {
+  .date-picker-native-wrapper { font-size: 0.95rem; }
+  .calendar-container {
+    width: 320px;
+    max-width: 90vw;
+    left: 0;
+    right: auto;
+    font-size: 0.95rem;
+    padding: 11px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 18px; height: 18px; }
+  .calendar-cell { width: 2.1em; height: 2.1em; font-size: 0.95rem; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.95rem;
+    padding: 2px 5px;
+    min-width: 3.3em;
+  }
+  .calendar-close-btn { font-size: 0.95rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.95rem; }
+}
+
+/* 900px */
+@media (max-width: 900px) {
+  .date-picker-native-wrapper { font-size: 0.9rem; }
+  .calendar-container {
+    width: 300px;
+    max-width: 90vw;
+    left: 0;
+    right: auto;
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 16px; height: 16px; }
+  .calendar-cell { width: 2em; height: 2em; font-size: 0.9rem; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.9rem;
+    padding: 2px 5px;
+    min-width: 3.1em;
+  }
+  .calendar-close-btn { font-size: 0.9rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.9rem; }
+}
+
+/* 800px */
+@media (max-width: 800px) {
+  .date-picker-native-wrapper { font-size: 0.85rem; }
+  .calendar-container {
+    width: 280px;
+    max-width: 90vw;
+    left: 0;
+    right: auto;
+    font-size: 0.85rem;
+    padding: 9px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 16px; height: 16px; }
+  .calendar-cell { width: 1.9em; height: 1.9em; font-size: 0.85rem; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.85rem;
+    padding: 2px 4px;
+    min-width: 2.9em;
+  }
+  .calendar-close-btn { font-size: 0.85rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.85rem; }
+}
+
+/* 700px */
+@media (max-width: 700px) {
+  .date-picker-native-wrapper { font-size: 0.8rem; }
+  .calendar-container {
+    width: 260px;
+    max-width: 92vw;
+    left: 0;
+    right: auto;
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 14px; height: 14px; }
+  .calendar-cell { width: 1.8em; height: 1.8em; font-size: 0.8rem; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.8rem;
+    padding: 2px 4px;
+    min-width: 2.7em;
+  }
+  .calendar-close-btn { font-size: 0.8rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.8rem; }
+}
+
+/* 600px - switch to near-full width for mobile */
+@media (max-width: 600px) {
+  .date-picker-native-wrapper { font-size: 0.75rem; }
+  .calendar-container {
+    /* full width with small horizontal inset so the popup doesn't touch edges */
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-width: calc(100% - 16px);
+    border-radius: 0;
+    font-size: 0.75rem;
+    padding: 7px;
+    box-sizing: border-box;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 14px; height: 14px; }
+  .calendar-cell { width: auto; height: auto; flex: 1; font-size: 0.75rem; padding: 0.2em 0; }
+  .calendar-row { gap: 4px; }
+  .calendar-grid { gap: 4px; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.75rem;
+    padding: 2px 3px;
+    min-width: 2.5em;
+  }
+  .calendar-close-btn { font-size: 0.75rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.75rem; }
+}
+
+/* 500px */
+@media (max-width: 500px) {
+  .date-picker-native-wrapper { font-size: 0.7rem; }
+  .calendar-container {
+    left: 6px;
+    right: 6px;
+    width: auto;
+    max-width: calc(100% - 12px);
+    font-size: 0.7rem;
+    padding: 6px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 12px; height: 12px; }
+  .calendar-cell { font-size: 0.7rem; padding: 0.18em 0; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.7rem;
+    padding: 2px 2px;
+    min-width: 2.3em;
+  }
+  .calendar-close-btn { font-size: 0.7rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.7rem; }
+}
+
+/* 400px */
+@media (max-width: 400px) {
+  .date-picker-native-wrapper { font-size: 0.65rem; }
+  .calendar-container {
+    left: 4px;
+    right: 4px;
+    width: auto;
+    max-width: calc(100% - 8px);
+    font-size: 0.65rem;
+    padding: 5px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 12px; height: 12px; }
+  .calendar-cell { font-size: 0.65rem; padding: 0.14em 0; }
+  .calendar-row { gap: 2px; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.65rem;
+    padding: 1px 2px;
+    min-width: 2.1em;
+  }
+  .calendar-close-btn { font-size: 0.65rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.65rem; }
+}
+
+/* 300px */
+@media (max-width: 300px) {
+  .date-picker-native-wrapper { font-size: 0.6rem; }
+  .calendar-container {
+    left: 2px;
+    right: 2px;
+    width: auto;
+    max-width: calc(100% - 4px);
+    font-size: 0.6rem;
+    padding: 4px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 10px; height: 10px; }
+  .calendar-cell { font-size: 0.6rem; padding: 0.12em 0; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.6rem;
+    padding: 1px 1px;
+    min-width: 1.9em;
+  }
+  .calendar-close-btn { font-size: 0.6rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.6rem; }
+}
+
+/* 200px */
+@media (max-width: 200px) {
+  .date-picker-native-wrapper { font-size: 0.55rem; }
+  .calendar-container {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.55rem;
+    padding: 3px;
+  }
+  .dp-calendar-icon [btn__icon], .dp-calendar-icon svg { width: 10px; height: 10px; }
+  .calendar-cell { font-size: 0.55rem; padding: 0.1em 0; }
+  .calendar-nav select, .calendar-nav input[type="number"] {
+    font-size: 0.55rem;
+    padding: 1px 1px;
+    min-width: 1.7em;
+  }
+  .calendar-close-btn { font-size: 0.55rem; }
+  ::ng-deep .calendar-close-btn .btn { font-size: 0.55rem; }
+}
+
+/* Ensure date-picker-native styles override app-button/button styles */
+::ng-deep .calendar-nav app-button,
+::ng-deep .calendar-nav app-button .btn,
+::ng-deep .calendar-container app-button.calendar-cell,
+::ng-deep .calendar-container app-button.calendar-cell .btn,
+::ng-deep .dp-calendar-icon app-button,
+::ng-deep .dp-calendar-icon app-button .btn {
+  min-width: 2.2em !important;
+  min-height: 2.2em !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  line-height: 1.2 !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+::ng-deep .calendar-container app-button.calendar-cell.selected .btn,
+::ng-deep .calendar-container app-button.calendar-cell.selected {
+  background: $primary-color !important;
+  color: #fff !important;
+}
+
+::ng-deep .calendar-container app-button.calendar-cell.today .btn {
+  border: 1px solid $primary-color !important;
+}
+
+::ng-deep .calendar-container app-button.calendar-cell.unavailable .btn,
+::ng-deep .calendar-container app-button.calendar-cell.unavailable {
+  color: #bbb !important;
+  background: #fafafa !important;
+  cursor: not-allowed !important;
+}
+
+::ng-deep .calendar-nav app-button[variant="primary"] .btn {
+  background: $primary-color !important;
+  color: #fff !important;
+}
+
+::ng-deep .calendar-nav app-button[variant="secondary"] .btn {
+  background: $secondary-color !important;
+  color: #fff !important;
+}
+
+::ng-deep .calendar-nav app-button .btn:hover,
+::ng-deep .calendar-nav app-button .btn:focus,
+::ng-deep .dp-calendar-icon app-button .btn:hover,
+::ng-deep .dp-calendar-icon app-button .btn:focus {
+  background: transparent !important;
+  box-shadow: none !important;
+}

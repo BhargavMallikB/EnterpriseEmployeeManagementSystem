@@ -1,0 +1,14 @@
+<div class="toggle-container" [ngClass]="size">
+  <div class="toggle-row">
+    <label *ngIf="label" class="toggle-label">{{ label }}</label>
+    <div class="switch-wrapper" [class.disabled]="disabled" (click)="onToggle()">
+      <div
+        class="switch-track"
+        [style.background-color]="checked ? color : '#ccc'"
+      >
+        <div class="switch-thumb" [class.checked]="checked"></div>
+      </div>
+      <span class="switch-text">{{ checked ? onLabel : offLabel }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<p>dropdown works!</p>
+<div class="dropdown-vertical">
+  <label *ngIf="label" class="dropdown-label">
+    {{ label }}
+    <span *ngIf="info" class="info-icon" [title]="info">&#9432;</span>
+  </label>
+  <div class="dropdown" [ngClass]="size" [ngStyle]="customStyle" [class.mobile]="isMobile()" [class.disabled]="disabled" [class.readonly]="readonly" (click)="toggleDropdown()">
+    <div class="dropdown-selected">
+      <ng-container *ngIf="multiselect; else singleSelected">
+        <span *ngIf="selectedOptions.length; else placeholderText">
+          <ng-container *ngFor="let opt of selectedOptions; let last = last">
+            {{ getOptionLabel(opt) }}<span *ngIf="!last">, </span>
+          </ng-container>
+          <span class="selected-count">({{ selectedOptions.length }} selected)</span>
+        </span>
+        <ng-template #placeholderText>{{ placeholder }}</ng-template>
+      </ng-container>
+      <ng-template #singleSelected>
+        <ng-container *ngIf="selectedOption() as selOpt; else placeholderOnly">
+          {{ getOptionLabel(selOpt) }}
+        </ng-container>
+        <ng-template #placeholderOnly>{{ placeholder }}</ng-template>
+      </ng-template>
+      <span class="arrow">&#9662;</span>
+    </div>
+    <ul class="dropdown-menu" *ngIf="isOpen()">
+      <li *ngIf="searchable" class="dropdown-search">
+        <div class="search-wrapper">
+          <lib-input-field
+            [(ngModel)]="searchTerm"
+            [placeholder]="'Search'"
+            [type]="'text'"
+            [disabled]="disabled || readonly"
+            [readonly]="readonly"
+            [autocapitalize]="'off'"
+            [clearable]="false"
+            (click)="$event.stopPropagation()"
+            (focus)="onSearchFocus()"
+            class="search-input"
+          ></lib-input-field>
+          
+          <lib-button
+            *ngIf="searchTerm"
+            type="button"
+            class="reset-btn"
+            label="✕"
+            size="small"
+            variant="danger"
+            (onClick)="resetSearch($event)"
+            [disabled]="disabled || readonly"
+            title="Clear search"
+          ></lib-button>
+        </div>
+      </li>
+      <li *ngFor="let option of filteredOptions" (click)="selectOption(option, $event)">
+        <ng-container *ngIf="multiselect">
+          <input type="checkbox" [checked]="isOptionSelected(option)" (click)="$event.stopPropagation(); selectOption(option, $event)" [disabled]="disabled || readonly" />
+        </ng-container>
+        {{ getOptionLabel(option) }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="checklist-container">
+  <label *ngFor="let skill of skills" class="checkbox-item">
+    <input
+      type="checkbox"
+      [value]="skill"
+      [checked]="selectedSkills.includes(skill)"
+      (change)="onCheckboxEvent(skill, $event)"
+    />
+    {{ skill }}
+  </label>
+</div>
+<button class="submit-btn" (click)="onSubmit()">Submit</button>

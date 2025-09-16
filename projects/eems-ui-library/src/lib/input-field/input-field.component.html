@@ -1,0 +1,59 @@
+<div class="input-field-container" [class.input-size-small]="size === 'small'" [class.input-size-large]="size === 'large'">
+  @if (label) {
+    <label class="input-label">
+      {{ label }}
+      @if (required) {
+        <span class="input-required">*</span>
+      }
+    </label>
+  }
+  <div class="input-wrapper" [class.input-disabled]="disabled" [class.input-error]="showError()">
+    @if (prefixImage) {
+      <span class="input-prefix-img">
+        <img [src]="prefixImage" alt="prefix" />
+      </span>
+    }
+    @if (icon && iconPosition === 'left') {
+      <span class="input-icon input-icon-left"><i [class]="icon"></i></span>
+    }
+    <input
+      #inputRef
+      [type]="type"
+      [attr.placeholder]="placeholder"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [attr.maxLength]="maxLength"
+      [ngModel]="displayValue()"
+      (ngModelChange)="onInput($event)"
+      (blur)="onBlur()"
+      [autocapitalize]="autocapitalize"
+      [attr.autofocus]="autofocus ? true : null"
+      class="input-field"
+      [class.input-error]="showError()"
+      [class.input-dirty]="dirty()"
+      [class.input-touched]="touched()"
+    />
+    @if (icon && iconPosition === 'right') {
+      <span class="input-icon input-icon-right"><i [class]="icon"></i></span>
+    }
+    @if (suffixImage) {
+      <span class="input-suffix-img">
+        <img [src]="suffixImage" alt="suffix" />
+      </span>
+    }
+    @if (isClearable()) {
+      <span class="input-clear" (click)="clearInput()">✖️</span>
+    }
+    @if (infoIcon) {
+      <span class="input-info-inside" [title]="infoTooltip">{{ infoIcon }}</span>
+    }
+  </div>
+  <!-- @if (showError()) {
+    <div class="input-error-message">{{ errorMessage() }}</div>
+  } -->
+      @if (showErrorOnSubmit) {
+    <div  class="input-error-message">
+      {{ error  }}
+    </div>
+  }
+</div>

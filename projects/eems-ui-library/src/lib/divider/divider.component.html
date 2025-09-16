@@ -1,0 +1,14 @@
+<div
+  class="divider"
+  [ngStyle]="orientation === 'horizontal'
+    ? {
+        'border-top': thickness + ' ' + style + ' ' + color,
+        width: length,
+        margin: margin
+      }
+    : {
+        'border-left': thickness + ' ' + style + ' ' + color,
+        height: length,
+        margin: margin
+      }">
+</div>

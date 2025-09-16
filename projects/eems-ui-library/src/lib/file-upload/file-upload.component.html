@@ -1,0 +1,45 @@
+<!-- Drag & Drop area when dragDrop is true -->
+<div
+  *ngIf="dragDrop; else normalButton"
+  [ngClass]="[customClass, dropAreaClass, isDragOver ? 'drag-over' : '']"
+  (click)="triggerFileInput()"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave()"
+>
+  <ng-content></ng-content>
+</div>
+
+<!-- Normal clickable area when dragDrop is false -->
+<ng-template #normalButton>
+  <lib-button
+    [label]="buttonLabel"
+    [variant]="buttonVariant"
+    [size]="buttonSize"
+    [disabled]="buttonDisabled"
+   
+    (clicked)="triggerFileInput()"
+  >
+    <ng-content></ng-content>
+  </lib-button>
+</ng-template>
+
+<!-- Hidden file input -->
+<input
+  #fileInput
+  type="file"
+  [attr.accept]="accept"
+  [attr.multiple]="multiple ? true : null"
+  style="display: none"
+  (change)="onFileChange($event)"
+>
+
+<!-- File preview section -->
+<div *ngIf="showPreview && previewUrls.length > 0" class="preview-list">
+  <img
+    *ngFor="let url of previewUrls"
+    [src]="url"
+    alt="Preview"
+    class="preview-item"
+  />
+</div>

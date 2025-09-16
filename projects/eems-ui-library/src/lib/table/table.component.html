@@ -1,0 +1,45 @@
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns"
+          (click)="changeSort(col.field, col.sortable)"
+          [style.cursor]="(globalSortable || col.sortable) ? 'pointer' : 'default'">
+        {{ col.header }}
+        <span *ngIf="(globalSortable || col.sortable) && sortField === col.field">
+          {{ sortDirection === 'asc' ? sortAscIcon : sortDescIcon }}
+        </span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of pagedData">
+      <ng-container *ngFor="let col of columns">
+        <td *ngIf="!cellTemplate">{{ row[col.field] }}</td>
+        <td *ngIf="cellTemplate">
+          <ng-container *ngTemplateOutlet="cellTemplate; context: { $implicit: row, field: col.field }"></ng-container>
+        </td>
+      </ng-container>
+    </tr>
+    <tr *ngIf="pagedData.length === 0">
+      <td [attr.colspan]="columns.length" style="text-align:center;">No data available</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="paginated" class="pagination">
+  <lib-button
+    [label]="prevLabel"
+    [variant]="'secondary'"
+    [size]="'small'"
+    [disabled]="serverSidePagination ? !hasPrev : currentPage === 1"
+    (clicked)="changePage(currentPage - 1)"
+  ></lib-button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <lib-button
+    [label]="nextLabel"
+    [variant]="'primary'"
+    [size]="'small'"
+    [disabled]="serverSidePagination ? !hasNext : currentPage === totalPages"
+    (clicked)="changePage(currentPage + 1)"
+  ></lib-button>
+</div>

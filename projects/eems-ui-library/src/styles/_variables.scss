@@ -1,0 +1,313 @@
+// Global SCSS variables for shared UI components
+// Fonts
+// $primary-font: 'Roboto', sans-serif;
+// $secondary-font: 'Open Sans', sans-serif;
+$primary-font: 'Poppins', sans-serif;
+$secondary-font: 'Pacifico', cursive;
+
+// Colors
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #19c37d;
+$danger-color: #dc3545;
+$warning-color: #f7b500;
+$info-color: #17a2b8;
+$light-color: #f9fbfd;
+$dark-color: #2a3142;
+$muted-color: #6c757d;
+$border-color: #e6e8f0;
+$input-bg: #fff;
+$input-disabled-bg: #e9ecef;
+$input-disabled-color: #6c757d;
+$input-error-color: #dc3545;
+$input-success-color: #28a745;
+$input-border-color: #ced4da;
+$input-focus-border-color: #13a76a;
+$input-radius: 6px;
+$label-color: #212529;
+$icon-color: #b0b7c3;
+$category-color: #7b8ca6;
+$breadcrumb-bg: #f9fbfd;
+$breadcrumb-title-color: #2a3142;
+$breadcrumb-item-color: #6c757d;
+$breadcrumb-separator-color: #d1d5db;
+$menu-bg: #f8fafc;
+$menu-shadow: 0 2px 8px rgba(30,34,90,0.04);
+$menu-border-color: #e6e8f0;
+
+// Alert Colors
+$alert-success-bg: #f0fff3;
+$alert-success-border: #c3e6cb;
+$alert-success-text: #155724;
+$alert-error-bg: #ffeff1;
+$alert-error-border: #f5c6cb;
+$alert-error-text: #d62c3d;
+$alert-warning-bg: #ffeaa7;
+$alert-warning-border: #ffeaa7;
+$alert-warning-text: #F89406;
+$alert-info-bg: #bee5eb;
+$alert-info-border: #bee5eb;
+$alert-info-text: #2F96B4;
+
+// Badge Colors
+$badge-primary: #007bff;
+$badge-secondary: #6c757d;
+$badge-success: #28a745;
+$badge-danger: #dc3545;
+$badge-warning: #ffc107;
+$badge-info: #17a2b8;
+$badge-light: #f8f9fa;
+$badge-dark: #343a40;
+
+// Badge Soft Colors
+$badge-soft-primary-bg: #cce5ff;
+$badge-soft-primary-text: #004085;
+$badge-soft-secondary-bg: #e2e3e5;
+$badge-soft-secondary-text: #383d41;
+$badge-soft-success-bg: #d4edda;
+$badge-soft-success-text: #155724;
+$badge-soft-danger-bg: #f8d7da;
+$badge-soft-danger-text: #721c24;
+$badge-soft-warning-bg: #fff3cd;
+$badge-soft-warning-text: #856404;
+$badge-soft-info-bg: #d1ecf1;
+$badge-soft-info-text: #0c5460;
+$badge-soft-light-bg: #fefefe;
+$badge-soft-light-text: #818182;
+$badge-soft-dark-bg: #d6d8d9;
+$badge-soft-dark-text: #1b1e21;
+
+// Form Colors
+$form-border-color: #ccc;
+$form-hover-border: #007bff;
+$form-hover-bg: #fff;
+$form-disabled-bg: #f5f5f5;
+$form-disabled-text: #aaa;
+$form-readonly-bg: #f8f8f8;
+$form-readonly-text: #888;
+$form-dropdown-shadow: rgba(0, 0, 0, 0.15);
+$form-dropdown-hover: #f0f0f0;
+
+// Button Colors
+$btn-custom-color: #f59e42;
+$btn-hover-shadow-primary: rgba(0,123,255,0.18);
+$btn-hover-shadow-secondary: rgba(108,117,125,0.18);
+$btn-hover-shadow-success: rgba(25,195,125,0.18);
+$btn-hover-shadow-danger: rgba(220,53,69,0.18);
+$btn-hover-shadow-custom: rgba(245,158,66,0.18);
+
+// Snackbar Colors
+$snackbar-bg: #23272f;
+$snackbar-success-gradient-start: #43a047;
+$snackbar-success-gradient-end: #388e3c;
+$snackbar-error-gradient-start: #e53935;
+$snackbar-error-gradient-end: #b71c1c;
+$snackbar-info-gradient-start: #1e88e5;
+$snackbar-info-gradient-end: #1565c0;
+$snackbar-warning-gradient-start: #fbc02d;
+$snackbar-warning-gradient-end: #f9a825;
+$snackbar-shadow: rgba(0,0,0,0.18);
+$snackbar-shadow-light: rgba(0,0,0,0.12);
+
+// Spinner Colors
+$spinner-bg: #eee;
+$spinner-primary: #1976d2;
+$spinner-text: #555;
+
+// Toggle Switch Colors
+$toggle-text-color: #343a40;
+$toggle-secondary-text: #495057;
+
+// Border radius
+$radius-small: 4px;
+$radius-medium: 6px;
+$radius-large: 8px;
+$radius-xlarge: 12px;
+$radius-round: 50%;
+
+// Font sizes
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.95rem;
+$font-size-base: 1rem;
+$font-size-md: 1.1rem;
+$font-size-lg: 1.2rem;
+$font-size-xl: 1.5rem;
+$font-size-xxl: 2rem;
+
+// Spacing
+$spacing-xs: 0.2rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 0.7rem;
+$spacing-lg: 1rem;
+$spacing-xl: 1.5rem;
+$spacing-xxl: 2rem; 
+
+// Avatar specific
+$avatar-border-radius: 50%;
+$avatar-text-color: #fff;
+
+// For file-upload and other small border-radius
+$border-radius-small: 4px;
+
+// Animation Durations
+$animation-fast: 0.2s;
+$animation-normal: 0.3s;
+$animation-slow: 0.5s;
+
+// Z-index levels
+$z-index-dropdown: 10;
+$z-index-snackbar: 9999;
+$z-index-modal: 1000;
+
+// Shadows
+$shadow-light: 0 2px 8px rgba(0,0,0,0.08);
+$shadow-medium: 0 4px 16px rgba(0,0,0,0.12);
+$shadow-heavy: 0 8px 24px rgba(0,0,0,0.18);
+
+// Transitions
+$transition-fast: all 0.2s ease;
+$transition-normal: all 0.3s ease;
+$transition-slow: all 0.5s ease; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Global SCSS variables for shared UI components
+ 
+// // Colors
+
+// $primary-color: #007bff;
+
+// $secondary-color: #6c757d;
+
+// $success-color: #19c37d;
+
+// $danger-color: #dc3545;
+
+// $warning-color: #f7b500;
+
+// $info-color: #17a2b8;
+
+// $light-color: #f9fbfd;
+
+// $dark-color: #2a3142;
+
+// $muted-color: #6c757d;
+
+// $border-color: #e6e8f0;
+
+// $input-bg: #fff;
+
+// $input-disabled-bg: #e9ecef;
+
+// $input-disabled-color: $muted-color;
+
+// $input-error-color: #dc3545;
+
+// $input-success-color: #28a745;
+
+// $input-border-color: #ced4da;
+
+// $input-focus-border-color: #13a76a;
+
+// $label-color: #212529;
+
+// $icon-color: #b0b7c3;
+
+// $category-color: #7b8ca6;
+
+// $breadcrumb-bg: #f9fbfd;
+
+// $breadcrumb-title-color: #2a3142;
+
+// $breadcrumb-item-color: #6c757d;
+
+// $breadcrumb-separator-color: #d1d5db;
+
+// $menu-bg: #f8fafc;
+
+// $menu-shadow: 0 2px 8px rgba(30,34,90,0.04);
+
+// $menu-border-color: #e6e8f0;
+ 
+// // Border radius
+
+// $radius-small: 4px;
+
+// $radius-medium: 6px;
+
+// $radius-large: 8px;
+
+// $radius-xlarge: 12px;
+
+// $radius-round: 50%;
+ 
+// // Font sizes
+
+// $font-size-xs: 0.75rem;
+
+// $font-size-sm: 0.95rem;
+
+// $font-size-base: 1rem;
+
+// $font-size-md: 1.1rem;
+
+// $font-size-lg: 1.2rem;
+
+// $font-size-xl: 1.5rem;
+
+// $font-size-xxl: 2rem;
+ 
+// // Spacing
+
+// $spacing-xs: 0.2rem;
+
+// $spacing-sm: 0.5rem;
+
+// $spacing-md: 0.7rem;
+
+// $spacing-lg: 1rem;
+
+// $spacing-xl: 1.5rem;
+
+// $spacing-xxl: 2rem;
+ 
+// // Avatar specific
+
+// $avatar-border-radius: 50%;
+
+// $avatar-text-color: #fff;
+ 
+// // For file-upload and other small border-radius
+
+// $border-radius-small: 4px; 
+
+// $input-radius: $radius-medium;
+ 

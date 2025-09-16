@@ -1,0 +1,131 @@
+<div class="date-picker-native-wrapper" [class.disabled]="disabled">
+  <div class="input-container" style="position: relative;">
+    <!-- Reusable input field -->
+    <lib-input-field
+      [label]="label"
+      [placeholder]="placeholder"
+      [required]="required"
+      [disabled]="disabled"
+      [error]="error"
+      [clearable]="clearable"
+      [size]="size"
+      [value]="displayValue()"             
+      [readonly]="true"
+      [type]="'date'"
+      [autofocus]="false"
+      (focus)="calendarOpen.set(true)"
+      (click)="calendarOpen.set(true)" >
+      <!-- clear button remains native inside input projection -->
+      <button
+        *ngIf="clearable && value()"
+        type="button"
+        class="clear-btn"
+        (click)="clear(); $event.stopPropagation()"
+      >
+        ✕
+      </button>
+    </lib-input-field>
+
+    <!-- Calendar icon button (SVG projected into the button) -->
+    <lib-button
+      class="dp-calendar-icon"
+      [variant]="'plain'"
+      [size]="'small'"
+      [disabled]="disabled"
+      [suppressAlert]="true"
+      (clicked)="toggleCalendar()"
+      aria-label="Open date picker"
+    >
+      <div btn__icon>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="5" width="18" height="16" rx="2" stroke="#888" stroke-width="2"/>
+          <path d="M16 3v4M8 3v4M3 9h18" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </lib-button>
+  </div>
+
+  <!-- Calendar Popup -->
+  <div *ngIf="calendarOpen() && !disabled" class="calendar-container" tabindex="-1" [ngStyle]="getCalendarBackgroundStyle()">
+    <div class="calendar-nav">
+      <lib-button
+        [label]="'‹'"
+        [variant]="'plain'"
+        [size]="'small'"
+        [suppressAlert]="true"
+        (clicked)="prevMonth()"
+        aria-label="Previous month"
+      >
+      </lib-button>
+
+      <select [ngModel]="currentMonth()" (ngModelChange)="onMonthChange($event)">
+        <option *ngFor="let m of months; let i = index" [value]="i">{{ m }}</option>
+      </select>
+
+      <input
+        type="number"
+        [ngModel]="currentYear()"
+        (ngModelChange)="onYearChange($event)"
+        style="width: 4em;"
+      />
+
+      <lib-button
+        [label]="'›'"
+        [variant]="'plain'"
+        [size]="'small'"
+        [suppressAlert]="true"
+        (clicked)="nextMonth()"
+        aria-label="Next month"
+      >
+      </lib-button>
+
+      <lib-button
+        [label]="'Today'"
+        [variant]="'primary'"
+        
+        [suppressAlert]="true"
+        (clicked)="goToToday()"
+        aria-label="Today"
+      >
+      </lib-button>
+    </div>
+
+    <div class="calendar-grid" tabindex="0" aria-label="Calendar grid">
+      <div class="calendar-row calendar-header">
+  <span *ngFor="let day of weekDays()" class="calendar-cell calendar-header-cell">{{ day }}</span>
+      </div>
+
+  <div *ngFor="let week of weeks()" class="calendar-row">
+        <ng-container *ngFor="let day of week">
+          <!-- use app-button for clickable day cells -->
+          <lib-button
+            *ngIf="day.label"
+            class="calendar-cell"
+            [class.today]="day.isToday"
+            [class.selected]="day.isSelected"
+            [class.unavailable]="day.isDisabled"
+            [ngStyle]="getMarkedStyle(day.date)"
+            [attr.title]="getMarkedDescription(day.date)"
+            [label]="day.label"
+            [disabled]="day.isDisabled"
+            [variant]="day.isSelected ? 'primary' : 'plain'"
+            [size]="'small'"
+            (clicked)="selectDate(day)"
+          ></lib-button>
+
+          <span *ngIf="!day.label" class="calendar-cell"></span>
+        </ng-container>
+      </div>
+    </div>
+
+    <lib-button
+      class="calendar-close-btn"
+      [label]="'Close'"
+      [variant]="'secondary'"
+      [size]="'small'"
+      [suppressAlert]="true"
+      (clicked)="calendarOpen.set(false)"
+    >
+    </lib-button>
+  </div>
+</div>

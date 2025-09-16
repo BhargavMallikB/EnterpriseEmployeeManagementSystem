@@ -1,0 +1,73 @@
+@use "../../styles/variables" as *;
+
+.badge {
+  display: inline-block;
+  text-align: center;
+  font-weight: 600;
+  padding: 0.25em 0.5em;
+  line-height: 1;
+  font-family: 'Roboto', sans-serif;
+
+  &--sm {
+    font-size: 0.65rem;
+    padding: 0.2em 0.45em;
+  }
+
+  &--md {
+    font-size: 0.75rem;
+    padding: 0.25em 0.5em;
+  }
+
+  &--lg {
+    font-size: 0.9rem;
+    padding: 0.3em 0.6em;
+  }
+
+  // Positions (optional - useful for notification dot badges)
+  &--top-right { position: absolute; top: 0.25rem; right: 0.25rem; }
+  &--top-left { position: absolute; top: 0.25rem; left: 0.25rem; }
+  &--bottom-right { position: absolute; bottom: 0.25rem; right: 0.25rem; }
+  &--bottom-left { position: absolute; bottom: 0.25rem; left: 0.25rem; }
+  &--inline { position: static; }
+
+  // Color variants
+  &--solid {
+    &.badge--primary    { background-color: $badge-primary; color: white; }
+    &.badge--secondary  { background-color: $badge-secondary; color: white; }
+    &.badge--success    { background-color: $badge-success; color: white; }
+    &.badge--danger     { background-color: $badge-danger; color: white; }
+    &.badge--warning    { background-color: $badge-warning; color: #212529; }
+    &.badge--info       { background-color: $badge-info; color: white; }
+    &.badge--light      { background-color: $badge-light; color: #212529; }
+    &.badge--dark       { background-color: $badge-dark; color: white; }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border: 1px solid currentColor;
+
+    &.badge--primary    { color: $badge-primary; }
+    &.badge--secondary  { color: $badge-secondary; }
+    &.badge--success    { color: $badge-success; }
+    &.badge--danger     { color: $badge-danger; }
+    &.badge--warning    { color: $badge-warning; }
+    &.badge--info       { color: $badge-info; }
+    &.badge--light      { color: $badge-light; }
+    &.badge--dark       { color: $badge-dark; }
+  }
+
+  &--soft {
+    &.badge--primary    { background-color: $badge-soft-primary-bg; color: $badge-soft-primary-text; }
+    &.badge--secondary  { background-color: $badge-soft-secondary-bg; color: $badge-soft-secondary-text; }
+    &.badge--success    { background-color: $badge-soft-success-bg; color: $badge-soft-success-text; }
+    &.badge--danger     { background-color: $badge-soft-danger-bg; color: $badge-soft-danger-text; }
+    &.badge--warning    { background-color: $badge-soft-warning-bg; color: $badge-soft-warning-text; }
+    &.badge--info       { background-color: $badge-soft-info-bg; color: $badge-soft-info-text; }
+    &.badge--light      { background-color: $badge-soft-light-bg; color: $badge-soft-light-text; }
+    &.badge--dark       { background-color: $badge-soft-dark-bg; color: $badge-soft-dark-text; }
+  }
+
+  &--rounded {
+    border-radius: 999px !important;
+  }
+}
