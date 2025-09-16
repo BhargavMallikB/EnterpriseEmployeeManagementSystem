@@ -6,6 +6,9 @@
     "paths": {
       "eems-data-source": [
         "./dist/eems-data-source"
+      ],
+      "eems-ui-library": [
+        "./dist/eems-ui-library"
       ]
     },
     "outDir": "./dist/out-tsc",
