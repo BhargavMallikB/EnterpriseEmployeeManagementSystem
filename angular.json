@@ -259,13 +259,61 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:application",
+					"builder": "@angular-architects/native-federation:build",
+					"options": {},
+					"configurations": {
+						"production": {
+							"target": "project-management:esbuild:production"
+						},
+						"development": {
+							"target": "project-management:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "project-management:serve-original:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 0
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/project-management/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/project-management/public"
+							}
+						],
+						"styles": [
+							"projects/project-management/src/styles.scss"
+						],
+						"scripts": []
+					}
+				},
+				"esbuild": {
+					"builder": "@angular/build:application",
 					"options": {
 						"outputPath": "dist/project-management",
 						"index": "projects/project-management/src/index.html",
 						"browser": "projects/project-management/src/main.ts",
 						"polyfills": [
-							"zone.js"
+							"zone.js",
+							"es-module-shims"
 						],
 						"tsConfig": "projects/project-management/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
@@ -304,40 +352,19 @@
 					},
 					"defaultConfiguration": "production"
 				},
-				"serve": {
+				"serve-original": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "project-management:build:production"
+							"buildTarget": "project-management:esbuild:production"
 						},
 						"development": {
-							"buildTarget": "project-management:build:development"
+							"buildTarget": "project-management:esbuild:development"
 						}
 					},
-					"defaultConfiguration": "development"
-				},
-				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n"
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
+					"defaultConfiguration": "development",
 					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						],
-						"tsConfig": "projects/project-management/tsconfig.spec.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/project-management/public"
-							}
-						],
-						"styles": [
-							"projects/project-management/src/styles.scss"
-						],
-						"scripts": []
+						"port": 4203
 					}
 				}
 			}
